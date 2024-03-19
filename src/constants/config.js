@@ -1,0 +1,4 @@
+import {API_BASE_URL, LOCATION_API_BASE_URL} from '@env';
+
+export const LOCATION_SERVICE_BASE_UR = LOCATION_API_BASE_URL;
+export const BASE_URL = API_BASE_URL;
