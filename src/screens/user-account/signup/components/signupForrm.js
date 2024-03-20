@@ -50,6 +50,9 @@ export default function SignupForm({updateFormField}) {
           inputContainerStyle={{width: '100%'}}
           inputStyle={{width: '100%'}}
           placeholder="Musk"
+          onChangeText={lastName => {
+            updateFormField({lastName});
+          }}
         />
       </View>
       <Input
@@ -57,6 +60,9 @@ export default function SignupForm({updateFormField}) {
         placeholder="09022334455"
         leftIcon={<Image source={flag} resizeMode="contain" />}
         inputType="phone"
+        onChangeText={phone => {
+          updateFormField({phone});
+        }}
       />
       <Input
         title="Email Address"
@@ -64,6 +70,9 @@ export default function SignupForm({updateFormField}) {
         leftIcon={<SimpleLineIcons size={14} name="envelope" />}
         inputType="email"
         textContentType="emailAddress"
+        onChangeText={email => {
+          updateFormField({email});
+        }}
       />
       <Input
         title="Create Password"
@@ -73,12 +82,16 @@ export default function SignupForm({updateFormField}) {
         rightIcon={<SimpleLineIcons color="#74AAF0" size={14} name="eye" />}
         onPressRightIcon={onTogglePassword}
         textContentType="password"
+        onChangeText={password => {
+          updateFormField({password});
+        }}
       />
 
       <View style={styles.buttonView}>
         <ActionButton
           onPress={() => console.log('press')}
           title="Get Started"
+          disabled={false}
         />
         <TouchableOpacity>
           <Text style={styles.guestText}>Continue as Guest</Text>
