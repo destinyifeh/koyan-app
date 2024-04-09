@@ -19,12 +19,14 @@ import Feather from 'react-native-vector-icons/Feather';
 import {useFocusEffect} from '@react-navigation/native';
 import {KoyanBottomDrawer} from '../../../components/KoyanBottomDrawer';
 import {VerifyModal} from './components/VerifyModal';
+import {VerifyForgotForm} from './components/verify-forgot-form';
+import {ForgotVerifyModal} from './components/forgot-verification-modal';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
-export default function VerifyEmailScreen(props) {
+export default function VerifyForgotPasswordEmailScreen(props) {
   const _ref = useRef();
-  const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(61);
   const [isSent, setIsSent] = useState(false);
   useFocusEffect(
     React.useCallback(() => {
@@ -36,8 +38,8 @@ export default function VerifyEmailScreen(props) {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds(seconds - 1);
+      if (seconds < 60) {
+        setSeconds(seconds + 1);
       }
     }, 1000);
 
@@ -48,11 +50,11 @@ export default function VerifyEmailScreen(props) {
     console.log(code, 'codeee');
     try {
       _ref.current?.open();
-      setSeconds(54);
+      setSeconds(0);
       setTimeout(() => {
         _ref.current?.close();
-        props.navigation.replace('VerifyEmail');
-        props.navigation.replace('VerifiedUser');
+        props.navigation.replace('VerifyForgotPasswordEmail');
+        props.navigation.replace('ResetPassword');
       }, 5000);
     } catch (err) {
       _ref.current?.close();
@@ -62,33 +64,32 @@ export default function VerifyEmailScreen(props) {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.contentContainer}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.goBackContainer}
           onPress={() => props.navigation.goBack()}>
           <Feather name="arrow-left" size={20} color="#000000" />
           <Text style={styles.backText}>Back</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <View style={styles.infoContainer}>
-          <Text style={styles.titleText}>Verify your Account</Text>
+          <Text style={styles.titleText}>Enter your Verification code</Text>
           <Text style={styles.descText}>
-            Please enter the 4 digit code sent to your registered number
+            Please enter the verification code sent to the email
           </Text>
-          <Text style={styles.numberText}>+2348123049582</Text>
+          <Text style={[styles.codeText, {color: '#08082B'}]}>
+            {seconds < 61 ? seconds + ':' + '60' : '00:00'}
+          </Text>
         </View>
 
-        <VerifyForm onSubmit={onSumbitToken} />
-        <View style={[styles.infoContainer, {marginTop: 25}]}>
-          <Text style={styles.codeText}> Didn't receive code yet?</Text>
-          <TouchableOpacity disabled={seconds > 0}>
-            <Text style={[styles.codeText, {color: '#74AAF0'}]}>
-              {seconds > 0
-                ? 'Resend OTP in' + ' ' + seconds + 's'
-                : 'Resend OTP'}
-            </Text>
+        <VerifyForgotForm onSubmit={onSumbitToken} />
+        <View
+          style={[styles.infoContainer, {marginTop: 25, flexDirection: 'row'}]}>
+          <Text style={styles.codeText}> Didn't not receive the mail?</Text>
+          <TouchableOpacity disabled={seconds < 60}>
+            <Text style={[styles.codeText, {color: '#74AAF0'}]}>Resend</Text>
           </TouchableOpacity>
         </View>
-        <VerifyModal
+        <ForgotVerifyModal
           containerStyle={styles.containerStyle}
           refRBSheet={_ref}
           height={deviceHeight * 0.83}

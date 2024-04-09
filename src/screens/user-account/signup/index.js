@@ -27,7 +27,7 @@ import flag from '../../../assets/media/nigeriaColor.png';
 import {ActionButton} from '../../../components/ActionButton';
 import SignupForm from './components/signupForrm';
 const deviceWidth = Dimensions.get('window').width;
-export default function SignupScreen() {
+export default function SignupScreen(props) {
   const [visiblePassword, setVisiblePassword] = useState(false);
   const [form, setForm] = useState('');
   useFocusEffect(
@@ -56,7 +56,8 @@ export default function SignupScreen() {
           <Text style={styles.titleText}>Create your account</Text>
           <View style={styles.descContainer}>
             <Text style={styles.descText}>Do you have an account? </Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('Login')}>
               <Text style={styles.loginText}>Login</Text>
             </TouchableOpacity>
           </View>
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flex: 1,
     paddingBottom: 60,
-    marginTop: 80,
+    marginTop: 60,
   },
   titleText: {
     fontFamily: FONT_FAMILY_BODY_SEMIBOLD,

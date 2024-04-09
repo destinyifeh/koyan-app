@@ -19,16 +19,15 @@ import {
   FONT_FAMILY_BODY_SEMIBOLD,
   MAX_ALLOWED_WIDTH,
 } from '../../../../constants/Styles';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-
+import {useNavigation} from '@react-navigation/native';
 import flag from '../../../../assets/media/nigeriaColor.png';
 import {ActionButton} from '../../../../components/ActionButton';
 
-export default function SignupForm({updateFormField}) {
+export default function LoginForm({updateFormField}) {
   const [visiblePassword, setVisiblePassword] = useState(false);
-
   const navigation = useNavigation();
   function onTogglePassword() {
     setVisiblePassword(!visiblePassword);
@@ -36,26 +35,6 @@ export default function SignupForm({updateFormField}) {
 
   return (
     <View style={styles.formInputContainer}>
-      <View style={styles.usernameContainer}>
-        <Input
-          title="First Name"
-          inputContainerStyle={{width: '100%'}}
-          inputStyle={{width: '100%'}}
-          placeholder="Destiny"
-          onChangeText={firstName => {
-            updateFormField({firstName});
-          }}
-        />
-        <Input
-          title="Last Name"
-          inputContainerStyle={{width: '100%'}}
-          inputStyle={{width: '100%'}}
-          placeholder="Musk"
-          onChangeText={lastName => {
-            updateFormField({lastName});
-          }}
-        />
-      </View>
       <Input
         title="Phone Number"
         placeholder="09022334455"
@@ -65,18 +44,9 @@ export default function SignupForm({updateFormField}) {
           updateFormField({phone});
         }}
       />
+
       <Input
-        title="Email Address"
-        placeholder="example@xyz.com"
-        leftIcon={<SimpleLineIcons size={14} name="envelope" />}
-        inputType="email"
-        textContentType="emailAddress"
-        onChangeText={email => {
-          updateFormField({email});
-        }}
-      />
-      <Input
-        title="Create Password"
+        title="Password"
         secureTextEntry={!visiblePassword}
         placeholder="*************************"
         leftIcon={<SimpleLineIcons size={14} name="lock" />}
@@ -87,11 +57,14 @@ export default function SignupForm({updateFormField}) {
           updateFormField({password});
         }}
       />
+      <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+        <Text style={styles.forgotText}>Forgot Password?</Text>
+      </TouchableOpacity>
 
       <View style={styles.buttonView}>
         <ActionButton
-          onPress={() => navigation.navigate('VerifyEmail')}
-          title="Get Started"
+          onPress={() => navigation.navigate('UserLocation')}
+          title="Login"
           disabled={false}
         />
         <TouchableOpacity>
@@ -103,12 +76,6 @@ export default function SignupForm({updateFormField}) {
 }
 
 const styles = StyleSheet.create({
-  usernameContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '46.8%',
-    gap: 20,
-  },
   formInputContainer: {
     marginTop: 20,
   },
@@ -123,5 +90,14 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     textAlign: 'center',
     marginTop: 10,
+  },
+  forgotText: {
+    fontFamily: FONT_FAMILY_BODY,
+    fontWeight: '400',
+    fontSize: 12,
+    lineHeight: 18,
+    color: '#000000',
+    textAlign: 'right',
+    marginTop: 5,
   },
 });

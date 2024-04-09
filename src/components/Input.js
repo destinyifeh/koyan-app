@@ -26,6 +26,7 @@ export const Input = ({
   inputContainerStyle,
   onPressRightIcon,
   onChangeText,
+  placeholderTextColor,
 }) => {
   return (
     <View style={styles.mainContainer}>
@@ -53,6 +54,7 @@ export const Input = ({
           secureTextEntry={secureTextEntry}
           defaultValue={value}
           onChangeText={onChangeText}
+          placeholderTextColor={placeholderTextColor}
         />
         {rightIcon && (
           <TouchableOpacity

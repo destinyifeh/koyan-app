@@ -36,3 +36,4 @@ export const COLOUR_LIGHT_BLUE = '#74AAF0';
 export const MAX_ALLOWED_WIDTH = 428;
 export const COLOUR__INPUT_TITLE = '#192426';
 export const COLOUR_DISABLED = '#DDDCDA';
+export const MAIN_APP_COLOUR = '#74AAF0';

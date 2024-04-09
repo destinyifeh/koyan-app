@@ -1,11 +1,10 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Button} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {
   COLOUR_DISABLED,
   COLOUR_LIGHT_BLUE,
   FONT_FAMILY_BODY,
 } from '../constants/Styles';
-import {useNavigation} from '@react-navigation/native';
 
 export const ActionButton = ({
   disabled,
@@ -14,12 +13,10 @@ export const ActionButton = ({
   color,
   backgroundcolor,
 }) => {
-  const navigation = useNavigation();
-
   return (
     <View style={styles.buttonContainer}>
       <TouchableOpacity
-        onPressIn={onPress}
+        onPress={onPress}
         disabled={disabled}
         style={[
           styles.button,
@@ -30,8 +27,7 @@ export const ActionButton = ({
               ? COLOUR_DISABLED
               : COLOUR_LIGHT_BLUE,
           },
-        ]}
-        onPress={() => navigation.navigate('Signup')}>
+        ]}>
         <Text style={[styles.buttontext, {color: color ? color : 'white'}]}>
           {title}
         </Text>

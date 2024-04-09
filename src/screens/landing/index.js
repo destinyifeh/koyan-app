@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -27,10 +27,10 @@ export default function LandingScreen(props) {
   useFocusEffect(
     React.useCallback(() => {
       StatusBar.setBackgroundColor(COLOUR_LIGHT_BLUE);
-
       StatusBar.setBarStyle('light-content');
     }, []),
   );
+
   return (
     <ScrollView
       style={styles.mainContainer}
