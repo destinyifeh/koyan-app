@@ -1,26 +1,21 @@
+import {useFocusEffect} from '@react-navigation/native';
 import React, {useEffect, useRef, useState} from 'react';
 import {
-  Text,
-  View,
-  StyleSheet,
   Dimensions,
   StatusBar,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import {VerifyForm} from './components/VerifyForm';
 import {
-  COLOUR_GHOST_WHITE,
   COLOUR_WHITE,
   FONT_FAMILY_BODY,
   FONT_FAMILY_BODY_SEMIBOLD,
   MAX_ALLOWED_WIDTH,
 } from '../../../constants/Styles';
-import Feather from 'react-native-vector-icons/Feather';
-import {useFocusEffect} from '@react-navigation/native';
-import {KoyanBottomDrawer} from '../../../components/KoyanBottomDrawer';
-import {VerifyModal} from './components/VerifyModal';
-import {VerifyForgotForm} from './components/verify-forgot-form';
 import {ForgotVerifyModal} from './components/forgot-verification-modal';
+import {VerifyForgotForm} from './components/verify-forgot-form';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
@@ -84,7 +79,12 @@ export default function VerifyForgotPasswordEmailScreen(props) {
         <VerifyForgotForm onSubmit={onSumbitToken} />
         <View
           style={[styles.infoContainer, {marginTop: 25, flexDirection: 'row'}]}>
-          <Text style={styles.codeText}> Didn't not receive the mail?</Text>
+          <Text
+            style={styles.codeText}
+            onPress={() => props.navigation.navigate('ResetPassword')}>
+            {' '}
+            Didn't not receive the mail?
+          </Text>
           <TouchableOpacity disabled={seconds < 60}>
             <Text style={[styles.codeText, {color: '#74AAF0'}]}>Resend</Text>
           </TouchableOpacity>
