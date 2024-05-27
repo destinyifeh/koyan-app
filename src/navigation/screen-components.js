@@ -1,3 +1,5 @@
+import EateriesScreen from '../screens/category-screens/eateries';
+import OpenEateriesScreen from '../screens/category-screens/eateries/open-eateries';
 import {DashboardStack} from '../screens/dashboard/navigator';
 import LandingScreen from '../screens/landing';
 import LocationScreen from '../screens/location';
@@ -27,4 +29,6 @@ export const screenComponents = [
   },
   {name: 'PasswordChangedSuccess', component: PasswordChangedScreen},
   {name: 'DashboardScreen', component: DashboardStack},
+  {name: 'Eateries', component: EateriesScreen},
+  {name: 'OpenEateries', component: OpenEateriesScreen},
 ];

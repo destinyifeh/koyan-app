@@ -1,26 +1,21 @@
-import React, {useEffect} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import React from 'react';
 import {
+  Dimensions,
+  Image,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
-  Image,
-  Dimensions,
-  Platform,
-  StatusBar,
-  Button,
-  ScrollView,
 } from 'react-native';
+import landingCart from '../../assets/media/landingCart.png';
 import {
   COLOUR_LIGHT_BLUE,
   FONT_FAMILY_BODY,
-  FONT_FAMILY_BODY_BOLD,
-  FONT_FAMILY_BODY_SEMIBOLD,
-  FONT_FAMILY_BODY_THIN,
   MAX_ALLOWED_WIDTH,
 } from '../../constants/Styles';
-import landingCart from '../../assets/media/landingCart.png';
-import {useFocusEffect} from '@react-navigation/native';
 
 const deviceWidth = Dimensions.get('window').width;
 export default function LandingScreen(props) {

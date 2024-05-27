@@ -1,16 +1,14 @@
 import React from 'react';
 import {
-  View,
+  StyleSheet,
   Text,
   TextInput,
-  StyleSheet,
   TouchableOpacity,
+  View,
   textContentType,
 } from 'react-native';
 import {
-  COLOUR_TITLE,
   COLOUR__INPUT_TITLE,
-  FONT_FAMILY_BODY,
   FONT_FAMILY_BODY_SEMIBOLD,
 } from '../constants/Styles';
 
@@ -27,10 +25,12 @@ export const Input = ({
   onPressRightIcon,
   onChangeText,
   placeholderTextColor,
+  titleStyle,
+  mainContainerStyle,
 }) => {
   return (
-    <View style={styles.mainContainer}>
-      <Text style={styles.title}>{title}</Text>
+    <View style={[styles.mainContainer, {...mainContainerStyle}]}>
+      <Text style={[styles.title, {...titleStyle}]}>{title}</Text>
       <View style={[styles.inputContainer, {...inputContainerStyle}]}>
         {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
         <TextInput

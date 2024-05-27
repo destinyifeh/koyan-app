@@ -1,41 +1,35 @@
-import React, {useEffect} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import React from 'react';
 import {
+  Dimensions,
+  Image,
+  ImageBackground,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
-  Image,
-  Dimensions,
-  Platform,
-  StatusBar,
-  Button,
-  ScrollView,
-  ImageBackground,
 } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
+import exploreChickenRepublic from '../../assets/media/exploreChickenRepublic.png';
+import exploreFood from '../../assets/media/exploreFood2.png';
+import exploreHotels from '../../assets/media/exploreHotels.png';
+import exploreSuperMart from '../../assets/media/exploreSupermart.png';
+import exploreThePlace from '../../assets/media/exploreThePlace.png';
+import locationMap from '../../assets/media/locationMap.png';
+import {Input} from '../../components/Input';
 import {
   COLOUR_LIGHT_BLUE,
   COLOUR_WHITE,
   FONT_FAMILY_BODY,
-  FONT_FAMILY_BODY_BOLD,
   FONT_FAMILY_BODY_SEMIBOLD,
-  FONT_FAMILY_BODY_THIN,
   MAIN_APP_COLOUR,
   MAX_ALLOWED_WIDTH,
 } from '../../constants/Styles';
-import landingCart from '../../assets/media/landingCart.png';
-import {useFocusEffect} from '@react-navigation/native';
-import locationMap from '../../assets/media/locationMap.png';
-import {Input} from '../../components/Input';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import exploreFood from '../../assets/media/exploreFood2.png';
-import exploreHotels from '../../assets/media/exploreHotels.png';
-import exploreChickenRepublic from '../../assets/media/exploreChickenRepublic.png';
-import exploreThePlace from '../../assets/media/exploreThePlace.png';
-import exploreSuperMart from '../../assets/media/exploreSupermart.png';
 export default function LocationScreen(props) {
   useFocusEffect(
     React.useCallback(() => {
@@ -71,7 +65,7 @@ export default function LocationScreen(props) {
                 rightIcon={
                   <AntDesign color="#74AAF0" size={20} name="checkcircle" />
                 }
-                textContentType="password"
+                textContentType="location"
                 onChangeText={location => {
                   console.log(location, 'locate');
                 }}

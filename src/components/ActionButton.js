@@ -12,6 +12,7 @@ export const ActionButton = ({
   title,
   color,
   backgroundcolor,
+  buttonStyle,
 }) => {
   return (
     <View style={styles.buttonContainer}>
@@ -20,7 +21,9 @@ export const ActionButton = ({
         disabled={disabled}
         style={[
           styles.button,
+
           {
+            ...buttonStyle,
             backgroundColor: backgroundcolor
               ? backgroundcolor
               : disabled

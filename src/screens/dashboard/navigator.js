@@ -1,21 +1,28 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons"
-import FontAwesome from "react-native-vector-icons/FontAwesome"
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 import QRScreen from './QR';
 import AccountScreen from './account';
 import HomeScreen from './home';
 import OrdersScreen from './orders';
+import {dashboardScreenComponents} from './screen-components';
 import SupportScreen from './support';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-function DashboardTabs() {
+export function DashboardTabs() {
   return (
-    <Tab.Navigator initialRouteName="Home" screenOptions={{headerShown: false, tabBarActiveBackgroundColor:"#E3EEFC", tabBarActiveTintColor:"#74AAF0"}}>
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveBackgroundColor: '#E3EEFC',
+        tabBarActiveTintColor: '#74AAF0',
+      }}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -44,7 +51,11 @@ function DashboardTabs() {
         options={{
           tabBarLabel: 'Scan QR',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="line-scan" color={color} size={size} />
+            <MaterialCommunityIcons
+              name="line-scan"
+              color={color}
+              size={size}
+            />
           ),
         }}
       />
@@ -53,7 +64,6 @@ function DashboardTabs() {
         name="Support"
         component={SupportScreen}
         options={{
-         
           tabBarLabel: 'Support',
           tabBarIcon: ({color, size}) => (
             <SimpleLineIcons name="earphones-alt" color={color} size={size} />
@@ -65,7 +75,6 @@ function DashboardTabs() {
         name="Account"
         component={AccountScreen}
         options={{
-         
           tabBarLabel: 'Account',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
@@ -81,7 +90,13 @@ export function DashboardStack() {
     <Stack.Navigator
       initialRouteName="Dashboard"
       screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Dashboard" component={DashboardTabs} />
+      {dashboardScreenComponents.map((screen, index) => (
+        <Stack.Screen
+          key={index}
+          name={screen.name}
+          component={screen.component}
+        />
+      ))}
     </Stack.Navigator>
   );
 }
