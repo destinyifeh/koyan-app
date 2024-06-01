@@ -1,16 +1,8 @@
-import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text,
-  StatusBar,
-  Platform,
-} from 'react-native';
-import splashLoader from '../assets/media/splashScreenLoader.gif';
-import {COLOUR_DARK_GREEN, COLOUR_GHOST_WHITE} from '../constants/Styles';
 import {useFocusEffect} from '@react-navigation/native';
+import React from 'react';
+import {Image, StatusBar, StyleSheet, View} from 'react-native';
+import splashLoader from '../assets/media/splashScreenLoader.gif';
+import {COLOUR_GHOST_WHITE} from '../constants/Styles';
 
 export default function SplashScreen(props) {
   useFocusEffect(

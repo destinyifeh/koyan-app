@@ -14,6 +14,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import restaurantitem from '../../../assets/media/resturant-item.png';
 import {Input} from '../../../components/Input';
 import {
+  COLOUR_GHOST_WHITE,
   COLOUR_WHITE,
   FONT_FAMILY_BODY,
   FONT_FAMILY_BODY_SEMIBOLD,
@@ -22,14 +23,17 @@ import {
 
 import {useFocusEffect} from '@react-navigation/native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import cartOrders from '../../../assets/icons/cart-orders-icon.png';
+import {ActionButton} from '../../../components/ActionButton';
 import {OpenEateriesItems} from './components/open-eateries-items';
-
+import {OrderTypeSheet} from './components/order-type-sheet';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
 export default function OpenEateriesScreen(props) {
   const [navValue, setNavValue] = React.useState(null);
-
+  const [checkCart, setCheckCart] = React.useState(true);
+  const sheetRef = React.useRef();
   useFocusEffect(
     React.useCallback(() => {
       StatusBar.setBackgroundColor(COLOUR_WHITE);
@@ -39,10 +43,19 @@ export default function OpenEateriesScreen(props) {
 
   React.useEffect(() => {
     setNavValue('all');
+    sheetRef.current?.open();
   }, []);
 
   const handleNavChange = nav => {
     setNavValue(nav);
+  };
+
+  const handleCloseSheet = React.useCallback(() => {
+    sheetRef.current?.close();
+  }, []);
+
+  const handleCheckCart = () => {
+    setCheckCart(!checkCart);
   };
   return (
     <View style={styles.mainContainer}>
@@ -198,6 +211,28 @@ export default function OpenEateriesScreen(props) {
           <OpenEateriesItems />
         </View>
       </View>
+      {!checkCart ? (
+        <View style={styles.btContainer}>
+          <ActionButton
+            title="Checkout order for N10,000"
+            onPress={() =>
+              props.navigation.navigate('CheckoutOrderConfirmationScreen')
+            }
+          />
+        </View>
+      ) : (
+        <TouchableOpacity
+          style={styles.cartContainer}
+          onPress={handleCheckCart}>
+          <View style={styles.cartNumberContainer}>
+            <Text style={styles.cartNumberText}>2</Text>
+          </View>
+
+          <Image source={cartOrders} style={{}} />
+        </TouchableOpacity>
+      )}
+
+      <OrderTypeSheet handleCloseSheet={handleCloseSheet} sheetRef={sheetRef} />
     </View>
   );
 }
@@ -214,7 +249,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flex: 1,
     paddingBottom: 60,
-    paddingTop: 50,
+    paddingTop: 30,
   },
 
   headerContainer: {},
@@ -325,5 +360,37 @@ const styles = StyleSheet.create({
   navInnerContainer2: {
     borderBottomWidth: 2,
     borderBottomColor: 'rgba(116, 170, 240, 0.1)',
+  },
+  cartNumberContainer: {
+    position: 'absolute',
+    top: 25,
+    left: 75,
+    zIndex: 1,
+    backgroundColor: COLOUR_GHOST_WHITE,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cartNumberText: {
+    fontFamily: FONT_FAMILY_BODY,
+    fontSize: 14,
+    lineHeight: 16.8,
+    fontWeight: '600',
+    color: '#000000',
+  },
+  cartContainer: {
+    bottom: 80,
+    right: 10,
+    position: 'absolute',
+    alignSelf: 'flex-end',
+  },
+  btContainer: {
+    bottom: 10,
+
+    position: 'absolute',
+    width: '90%',
+    alignSelf: 'center',
   },
 });

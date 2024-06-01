@@ -1,5 +1,7 @@
+import CheckoutOrderConfirmationScreen from '../screens/cashout-screens/checkout-order-confirmation';
 import EateriesScreen from '../screens/category-screens/eateries';
 import OpenEateriesScreen from '../screens/category-screens/eateries/open-eateries';
+import OrderDescriptionScreen from '../screens/category-screens/eateries/order-description';
 import {DashboardStack} from '../screens/dashboard/navigator';
 import LandingScreen from '../screens/landing';
 import LocationScreen from '../screens/location';
@@ -31,4 +33,9 @@ export const screenComponents = [
   {name: 'DashboardScreen', component: DashboardStack},
   {name: 'Eateries', component: EateriesScreen},
   {name: 'OpenEateries', component: OpenEateriesScreen},
+  {name: 'OrderDescriptionScreen', component: OrderDescriptionScreen},
+  {
+    name: 'CheckoutOrderConfirmationScreen',
+    component: CheckoutOrderConfirmationScreen,
+  },
 ];

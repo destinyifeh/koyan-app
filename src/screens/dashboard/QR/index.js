@@ -8,12 +8,21 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import Feather from 'react-native-vector-icons/Feather';
+
 import approvedIcon from '../../../assets/icons/approve-cart.png';
-import closeIcon from '../../../assets/icons/close-scan-modal.png';
+//import closeIcon from '../../../assets/icons/close-scan-modal.png';
+import {
+  Camera,
+  useCameraDevice,
+  useCameraPermission,
+  useCodeScanner,
+} from 'react-native-vision-camera';
 import minusCart from '../../../assets/icons/minus-cart.png';
 import plusCart from '../../../assets/icons/plus-cart.png';
 import phoneScanBg from '../../../assets/media/phone-photo-scan.jpeg';
@@ -29,9 +38,13 @@ import {
 } from '../../../constants/Styles';
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
-export default function QRScreen() {
+export default function QRScreen(props) {
   const ref = React.useRef();
   const [scanContents, setScenContents] = React.useState(null);
+  const [scannedValue, setScannedValue] = React.useState(null);
+  const device = useCameraDevice('back');
+  const {hasPermission, requestPermission} = useCameraPermission();
+
   useFocusEffect(
     React.useCallback(() => {
       StatusBar.setBackgroundColor('transparent');
@@ -42,14 +55,84 @@ export default function QRScreen() {
   );
 
   React.useEffect(() => {
-    // setScenContents('ProceedContent');
+    // setScenContents('proceedContent');
+    handleCameralPermissionRequest();
   }, []);
 
+  const handleCameralPermissionRequest = () => {
+    if (!hasPermission) return requestPermission();
+  };
   const handleContentChange = content => {
     setScenContents(content);
   };
 
-  const ProceedContent = () => {
+  const codeScanner = useCodeScanner({
+    codeTypes: ['qr', 'ean-13'],
+    onCodeScanned: codes => {
+      codes.forEach(code => {
+        console.log('Code type:', code.type);
+        console.log('Code value:', code.value);
+        setScannedValue(code.value);
+        if (code.frame) {
+          console.log('Code frame - x:', code.frame.x);
+          console.log('Code frame - y:', code.frame.y);
+          console.log('Code frame - width:', code.frame.width);
+          console.log('Code frame - height:', code.frame.height);
+        }
+        if (code.corners) {
+          console.log('Code corners:', code.corners);
+        }
+      });
+      if (scannedValue !== null) {
+        console.log(scannedValue, 'ssv');
+        ToastAndroid.show('Scanned', ToastAndroid.LONG);
+        handleContentChange('addToCartContent');
+      }
+    },
+  });
+  const handleScan = () => {
+    console.log('here meee');
+    try {
+      if (!hasPermission) return requestPermission();
+      if (device == null) return console.log('no device');
+      console.log(device, 'devicee');
+
+      handleContentChange('cameralView');
+    } catch (err) {
+      console.log(err, 'camera error');
+    }
+  };
+
+  const cameralView = () => {
+    return (
+      <View style={{flex: 1}}>
+        <TouchableOpacity
+          style={{marginTop: 50, left: 20, position: 'absolute', zIndex: 1}}
+          onPress={() => handleContentChange('proceedContent')}>
+          <Feather name="arrow-left" size={18} color="white" />
+        </TouchableOpacity>
+        <Text
+          style={{
+            position: 'absolute',
+            zIndex: 1,
+            top: '50%',
+            color: 'white',
+            textAlign: 'center',
+            alignSelf: 'center',
+          }}>
+          Scan the code...
+        </Text>
+        <Camera
+          style={StyleSheet.absoluteFill}
+          device={device}
+          isActive={true}
+          codeScanner={codeScanner}
+        />
+      </View>
+    );
+  };
+
+  const proceedContent = () => {
     return (
       <Animatable.View style={{flex: 1}} animation="slideInUp">
         <ImageBackground
@@ -75,11 +158,13 @@ export default function QRScreen() {
             </View>
             <View style={{width: '70%', alignSelf: 'center'}}>
               <ActionButton
-                onPress={() => handleContentChange('AddToCartContent')}
+                //  onPress={() => handleContentChange('AddToCartContent')}
                 title="Proceed to Scan"
+                onPress={handleScan}
               />
 
               <ActionButton
+                onPress={() => props.navigation.goBack()}
                 title="Cancel"
                 backgroundcolor="transparent"
                 buttonStyle={{borderColor: COLOUR_LIGHT_BLUE, borderWidth: 1}}
@@ -91,13 +176,19 @@ export default function QRScreen() {
     );
   };
 
-  const AddToCartContent = () => {
+  const addToCartContent = () => {
     return (
       <Animatable.View style={{flex: 1}} animation="slideInUp">
         <ImageBackground
           source={phoneScanBg}
           imageStyle={{}}
-          style={{width: '100%', height: deviceHeight * 0.5}}></ImageBackground>
+          style={{width: '100%', height: deviceHeight * 0.5}}>
+          <TouchableOpacity
+            style={{marginTop: 35, left: 15}}
+            onPress={() => handleContentChange('proceedContent')}>
+            <Feather name="arrow-left" size={18} color="white" />
+          </TouchableOpacity>
+        </ImageBackground>
 
         <ImageBackground
           source={scanBg2}
@@ -108,11 +199,11 @@ export default function QRScreen() {
             flexGrow: 1,
           }}>
           <ScrollView style={styles.contentContainer}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{alignSelf: 'flex-end'}}
               onPress={() => handleContentChange('ProceedContent')}>
               <Image source={closeIcon} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Text style={[styles.titleText, {width: 240, alignSelf: 'center'}]}>
               Honeywell Spaghetti - 500g N12,000 per carton
             </Text>
@@ -155,13 +246,19 @@ export default function QRScreen() {
     );
   };
 
-  const ItemAddedContent = () => {
+  const itemAddedContent = () => {
     return (
       <Animatable.View style={{flex: 1}} animation="slideInUp">
         <ImageBackground
           source={phoneScanBg}
           imageStyle={{}}
-          style={{width: '100%', height: deviceHeight * 0.5}}></ImageBackground>
+          style={{width: '100%', height: deviceHeight * 0.5}}>
+          <TouchableOpacity
+            style={{marginTop: 35, left: 15}}
+            onPress={() => handleContentChange('proceedContent')}>
+            <Feather name="arrow-left" size={18} color="white" />
+          </TouchableOpacity>
+        </ImageBackground>
 
         <ImageBackground
           source={scanBg2}
@@ -172,11 +269,11 @@ export default function QRScreen() {
             flexGrow: 1,
           }}>
           <ScrollView style={styles.contentContainer}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{alignSelf: 'flex-end'}}
               onPress={() => handleContentChange('ProceedContent')}>
               <Image source={closeIcon} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Text style={styles.titleText}>Added Successfully!</Text>
             <View>
               <Text
@@ -198,9 +295,15 @@ export default function QRScreen() {
             </View>
 
             <View style={{width: '70%', alignSelf: 'center'}}>
-              <ActionButton title="Continue Shopping" />
+              <ActionButton
+                title="Continue Shopping"
+                onPress={() => props.navigation.navigate('Home')}
+              />
 
               <ActionButton
+                onPress={() =>
+                  props.navigation.navigate('CheckoutOrderConfirmationScreen')
+                }
                 title="Proceed to Checkout"
                 backgroundcolor="transparent"
                 buttonStyle={{borderColor: COLOUR_LIGHT_BLUE, borderWidth: 1}}
@@ -212,14 +315,15 @@ export default function QRScreen() {
     );
   };
 
-  const scanContentComponents = {
-    proceedContent: ProceedContent,
-    AddToCartContent: AddToCartContent,
-    ItemAddedContent: ItemAddedContent,
+  const scanContentFunctions = {
+    proceedContent: proceedContent(),
+    addToCartContent: addToCartContent(),
+    itemAddedContent: itemAddedContent(),
+    cameralView: cameralView(),
   };
-  const Component = scanContentComponents[scanContents];
+  const content = scanContentFunctions[scanContents];
 
-  return <>{Component ? <Component /> : <ProceedContent />}</>;
+  return <>{content ? content : proceedContent()}</>;
 }
 
 const styles = StyleSheet.create({

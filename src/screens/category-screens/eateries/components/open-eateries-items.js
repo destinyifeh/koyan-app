@@ -2,17 +2,19 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import restaurantitem from '../../../../assets/media/resturant-item.png';
 
+import {useNavigation} from '@react-navigation/native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import plusCart from '../../../../assets/icons/plus-cart.png';
 import {
   FONT_FAMILY_BODY,
   FONT_FAMILY_BODY_SEMIBOLD,
 } from '../../../../constants/Styles';
-
 export const OpenEateriesItems = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.mainContainer}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('OrderDescriptionScreen')}>
         <Image
           source={restaurantitem}
           style={{width: 152, height: 164, borderRadius: 10}}
@@ -37,7 +39,9 @@ export const OpenEateriesItems = () => {
           <TouchableOpacity>
             <EvilIcons name="heart" size={25} color="#8896AB" />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            style={{top: 2.5}}
+            onPress={() => navigation.navigate('OrderDescriptionScreen')}>
             <Image source={plusCart} style={{width: 17, height: 17}} />
           </TouchableOpacity>
         </View>
