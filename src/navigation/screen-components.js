@@ -1,4 +1,9 @@
-import CheckoutOrderConfirmationScreen from '../screens/cashout-screens/checkout-order-confirmation';
+import CheckoutDeliveryConfirmOrderScreen from '../screens/cashout-screens/checkout-delivery/checkout-delivery-confirm-order';
+import CheckoutDeliveryProceedScreen from '../screens/cashout-screens/checkout-delivery/checkout-delivery-proceed';
+import CheckoutEatInConfirmOrderScreen from '../screens/cashout-screens/checkout-eat-in/confirm-order';
+import CheckoutEatInProceedScreen from '../screens/cashout-screens/checkout-eat-in/proceed-order';
+import CheckoutPickupConfirmOrderScreen from '../screens/cashout-screens/checkout-pickup/confirm-order';
+import CheckoutPickupProceedScreen from '../screens/cashout-screens/checkout-pickup/proceed-order';
 import EateriesScreen from '../screens/category-screens/eateries';
 import OpenEateriesScreen from '../screens/category-screens/eateries/open-eateries';
 import OrderDescriptionScreen from '../screens/category-screens/eateries/order-description';
@@ -34,8 +39,30 @@ export const screenComponents = [
   {name: 'Eateries', component: EateriesScreen},
   {name: 'OpenEateries', component: OpenEateriesScreen},
   {name: 'OrderDescriptionScreen', component: OrderDescriptionScreen},
+
   {
-    name: 'CheckoutOrderConfirmationScreen',
-    component: CheckoutOrderConfirmationScreen,
+    name: 'CheckoutDeliveryConfirmOrderScreen',
+    component: CheckoutDeliveryConfirmOrderScreen,
+  },
+  {
+    name: 'CheckoutDeliveryProceedScreen',
+    component: CheckoutDeliveryProceedScreen,
+  },
+  {
+    name: 'CheckoutEatInProceedScreen',
+    component: CheckoutEatInProceedScreen,
+  },
+  {
+    name: 'CheckoutEatInConfirmOrderScreen',
+    component: CheckoutEatInConfirmOrderScreen,
+  },
+
+  {
+    name: 'CheckoutPickupProceedScreen',
+    component: CheckoutPickupProceedScreen,
+  },
+  {
+    name: 'CheckoutPickupConfirmOrderScreen',
+    component: CheckoutPickupConfirmOrderScreen,
   },
 ];

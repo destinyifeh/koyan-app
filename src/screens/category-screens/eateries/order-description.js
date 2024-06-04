@@ -19,6 +19,7 @@ import {
 } from '../../../constants/Styles';
 
 import {useFocusEffect} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 import plusCart from '../../../assets/icons/plus-cart.png';
 import {ActionButton} from '../../../components/ActionButton';
 import {SuccessShoppingOrderSheet} from './components/success-sheet';
@@ -28,6 +29,8 @@ const deviceHeight = Dimensions.get('window').height;
 export default function OrderDescriptionScreen(props) {
   const [navValue, setNavValue] = React.useState(null);
   const sheetRef = React.useRef();
+  const eateries = useSelector(state => state.eateries);
+
   useFocusEffect(
     React.useCallback(() => {
       StatusBar.setBackgroundColor(COLOUR_WHITE);
@@ -46,6 +49,12 @@ export default function OrderDescriptionScreen(props) {
   const handleCloseSheet = React.useCallback(() => {
     sheetRef.current?.close();
   }, []);
+
+  const handleCheckoutNavigation = () => {
+    const {orderType} = eateries;
+    handleCloseSheet();
+    props.navigation.navigate(orderType.route);
+  };
 
   const AdditionalContents = () => {
     return (
@@ -104,7 +113,6 @@ export default function OrderDescriptionScreen(props) {
         style={styles.contentContainer}
         contentContainerStyle={{
           paddingBottom: 100,
-          paddingTop: 30,
         }}>
         <View style={styles.headerContainer}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
@@ -144,6 +152,7 @@ export default function OrderDescriptionScreen(props) {
       <SuccessShoppingOrderSheet
         handleCloseSheet={handleCloseSheet}
         sheetRef={sheetRef}
+        handleCheckoutNavigation={handleCheckoutNavigation}
       />
     </View>
   );
@@ -159,6 +168,7 @@ const styles = StyleSheet.create({
     width:
       deviceWidth > MAX_ALLOWED_WIDTH ? MAX_ALLOWED_WIDTH : deviceWidth * 0.9,
     alignSelf: 'center',
+    paddingTop: 50,
   },
 
   headerContainer: {

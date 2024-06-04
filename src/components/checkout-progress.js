@@ -11,7 +11,8 @@ export const CheckoutProgressTwo = () => {
           alignItems: 'center',
           width: '100%',
           position: 'absolute',
-          top: 12,
+          top: 0,
+          bottom: 0,
           zIndex: 1,
         }}>
         <View

@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flex: 1,
     paddingBottom: 60,
-    paddingTop: 19,
+    paddingTop: 35,
   },
 
   categoriesInnerContainer: {

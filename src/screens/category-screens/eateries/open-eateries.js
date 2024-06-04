@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {
   Dimensions,
   Image,
@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useDispatch, useSelector} from 'react-redux';
 import restaurantitem from '../../../assets/media/resturant-item.png';
 import {Input} from '../../../components/Input';
 import {
@@ -25,6 +26,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import cartOrders from '../../../assets/icons/cart-orders-icon.png';
 import {ActionButton} from '../../../components/ActionButton';
+import {getOrderChoice} from '../../../state-management/features/eateries/eateriesSlice';
 import {OpenEateriesItems} from './components/open-eateries-items';
 import {OrderTypeSheet} from './components/order-type-sheet';
 const deviceWidth = Dimensions.get('window').width;
@@ -34,6 +36,9 @@ export default function OpenEateriesScreen(props) {
   const [navValue, setNavValue] = React.useState(null);
   const [checkCart, setCheckCart] = React.useState(true);
   const sheetRef = React.useRef();
+  const dispatch = useDispatch();
+  const eateries = useSelector(state => state.eateries);
+
   useFocusEffect(
     React.useCallback(() => {
       StatusBar.setBackgroundColor(COLOUR_WHITE);
@@ -44,7 +49,17 @@ export default function OpenEateriesScreen(props) {
   React.useEffect(() => {
     setNavValue('all');
     sheetRef.current?.open();
+    handleInitialOrderType();
   }, []);
+
+  const handleInitialOrderType = useCallback(() => {
+    dispatch(
+      getOrderChoice({
+        choice: 'delivery',
+        route: 'CheckoutDeliveryConfirmOrderScreen',
+      }),
+    );
+  }, [dispatch]);
 
   const handleNavChange = nav => {
     setNavValue(nav);
@@ -54,8 +69,22 @@ export default function OpenEateriesScreen(props) {
     sheetRef.current?.close();
   }, []);
 
+  const handleOrderType = useCallback(
+    (choice, route) => {
+      console.log(choice, route, 'choice');
+      dispatch(getOrderChoice({choice: choice, route: route}));
+    },
+    [dispatch],
+  );
+
   const handleCheckCart = () => {
     setCheckCart(!checkCart);
+  };
+
+  const handleCheckoutNavigation = () => {
+    const {orderType} = eateries;
+    console.log(orderType, 'choicer');
+    props.navigation.navigate(orderType.route);
   };
   return (
     <View style={styles.mainContainer}>
@@ -215,9 +244,7 @@ export default function OpenEateriesScreen(props) {
         <View style={styles.btContainer}>
           <ActionButton
             title="Checkout order for N10,000"
-            onPress={() =>
-              props.navigation.navigate('CheckoutOrderConfirmationScreen')
-            }
+            onPress={handleCheckoutNavigation}
           />
         </View>
       ) : (
@@ -232,7 +259,11 @@ export default function OpenEateriesScreen(props) {
         </TouchableOpacity>
       )}
 
-      <OrderTypeSheet handleCloseSheet={handleCloseSheet} sheetRef={sheetRef} />
+      <OrderTypeSheet
+        handleOrderType={handleOrderType}
+        handleCloseSheet={handleCloseSheet}
+        sheetRef={sheetRef}
+      />
     </View>
   );
 }
@@ -249,7 +280,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flex: 1,
     paddingBottom: 60,
-    paddingTop: 30,
+    paddingTop: 50,
   },
 
   headerContainer: {},

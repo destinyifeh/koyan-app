@@ -22,14 +22,19 @@ import {
 } from '../../../../constants/Styles';
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
-export const OrderTypeSheet = ({sheetRef, handleCloseSheet}) => {
+export const OrderTypeSheet = ({
+  sheetRef,
+  handleCloseSheet,
+  handleOrderType,
+}) => {
   const [selectType, setSelectType] = React.useState(null);
   const [selectTypeval, setSelectTypeVal] = React.useState({
     eat: false,
     pickup: false,
     delivery: true,
   });
-  const handleSelectOrderType = order => {
+  const handleSelectOrderType = (order, route) => {
+    handleOrderType(order, route);
     if (order === 'eat') {
       setSelectTypeVal(prev => ({
         ...prev,
@@ -82,7 +87,10 @@ export const OrderTypeSheet = ({sheetRef, handleCloseSheet}) => {
               </View>
               <Text style={styles.selectText}>Eat-in</Text>
             </View>
-            <TouchableOpacity onPress={() => handleSelectOrderType('eat')}>
+            <TouchableOpacity
+              onPress={() =>
+                handleSelectOrderType('eat', 'CheckoutEatInConfirmOrderScreen')
+              }>
               {selectTypeval.eat ? (
                 <Image source={orderChecked} />
               ) : (
@@ -98,7 +106,13 @@ export const OrderTypeSheet = ({sheetRef, handleCloseSheet}) => {
               </View>
               <Text style={styles.selectText}>Pick-up</Text>
             </View>
-            <TouchableOpacity onPress={() => handleSelectOrderType('pickup')}>
+            <TouchableOpacity
+              onPress={() =>
+                handleSelectOrderType(
+                  'pickup',
+                  'CheckoutPickupConfirmOrderScreen',
+                )
+              }>
               {selectTypeval.pickup ? (
                 <Image source={orderChecked} />
               ) : (
@@ -115,7 +129,13 @@ export const OrderTypeSheet = ({sheetRef, handleCloseSheet}) => {
 
               <Text style={styles.selectText}>Delivery</Text>
             </View>
-            <TouchableOpacity onPress={() => handleSelectOrderType('delivery')}>
+            <TouchableOpacity
+              onPress={() =>
+                handleSelectOrderType(
+                  'delivery',
+                  'CheckoutDeliveryConfirmOrderScreen',
+                )
+              }>
               {selectTypeval.delivery ? (
                 <Image source={orderChecked} />
               ) : (

@@ -105,7 +105,7 @@ export default function QRScreen(props) {
 
   const cameralView = () => {
     return (
-      <View style={{flex: 1}}>
+      <Animatable.View style={{flex: 1}} animation="slideInUp">
         <TouchableOpacity
           style={{marginTop: 50, left: 20, position: 'absolute', zIndex: 1}}
           onPress={() => handleContentChange('proceedContent')}>
@@ -128,7 +128,7 @@ export default function QRScreen(props) {
           isActive={true}
           codeScanner={codeScanner}
         />
-      </View>
+      </Animatable.View>
     );
   };
 

@@ -20,7 +20,11 @@ import {
 } from '../../../../constants/Styles';
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
-export const SuccessShoppingOrderSheet = ({sheetRef, handleCloseSheet}) => {
+export const SuccessShoppingOrderSheet = ({
+  sheetRef,
+  handleCloseSheet,
+  handleCheckoutNavigation,
+}) => {
   const [selectType, setSelectType] = React.useState(null);
   const navigation = useNavigation();
   return (
@@ -55,10 +59,7 @@ export const SuccessShoppingOrderSheet = ({sheetRef, handleCloseSheet}) => {
           />
 
           <ActionButton
-            onPress={() => (
-              handleCloseSheet(),
-              navigation.navigate('CheckoutOrderConfirmationScreen')
-            )}
+            onPress={handleCheckoutNavigation}
             title="Proceed to Checkout"
             backgroundcolor="transparent"
             color="#74AAF0"
