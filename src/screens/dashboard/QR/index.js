@@ -40,7 +40,7 @@ const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 export default function QRScreen(props) {
   const ref = React.useRef();
-  const [scanContents, setScenContents] = React.useState(null);
+  const [scanContents, setScanContents] = React.useState(null);
   const [scannedValue, setScannedValue] = React.useState(null);
   const device = useCameraDevice('back');
   const {hasPermission, requestPermission} = useCameraPermission();
@@ -50,7 +50,7 @@ export default function QRScreen(props) {
       StatusBar.setBackgroundColor('transparent');
       StatusBar.setTranslucent(true);
       StatusBar.setBarStyle('white-content');
-      setScenContents('ProceedContent');
+      setScanContents('ProceedContent');
     }, []),
   );
 
@@ -63,7 +63,7 @@ export default function QRScreen(props) {
     if (!hasPermission) return requestPermission();
   };
   const handleContentChange = content => {
-    setScenContents(content);
+    return setScanContents(content);
   };
 
   const codeScanner = useCodeScanner({
@@ -237,7 +237,7 @@ export default function QRScreen(props) {
             <View style={{width: '70%', alignSelf: 'center'}}>
               <ActionButton
                 title="Add to Cart"
-                onPress={() => handleContentChange('ItemAddedContent')}
+                onPress={() => setScanContents('itemAddedContent')}
               />
             </View>
           </ScrollView>
@@ -302,7 +302,7 @@ export default function QRScreen(props) {
 
               <ActionButton
                 onPress={() =>
-                  props.navigation.navigate('CheckoutOrderConfirmationScreen')
+                  props.navigation.navigate('CheckoutPickupConfirmOrderScreen')
                 }
                 title="Proceed to Checkout"
                 backgroundcolor="transparent"
