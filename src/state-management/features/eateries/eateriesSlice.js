@@ -5,6 +5,7 @@ const initialState = {
     choice: null,
     route: null,
   },
+  paymentMethod: null,
 };
 
 export const eateriesSlice = createSlice({
@@ -16,8 +17,13 @@ export const eateriesSlice = createSlice({
       state.orderType.choice = action.payload.choice;
       state.orderType.route = action.payload.route;
     },
+
+    getPaymentMethod: (state, action) => {
+      console.log(action.payload, 'payment method state');
+      state.paymentMethod = action.payload;
+    },
   },
 });
 
-export const {getOrderChoice} = eateriesSlice.actions;
+export const {getOrderChoice, getPaymentMethod} = eateriesSlice.actions;
 export default eateriesSlice.reducer;

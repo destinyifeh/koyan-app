@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, text} from 'react-native';
+import {View} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
 export const KoyanBottomDrawer = ({

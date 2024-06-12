@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     width:
       deviceWidth > MAX_ALLOWED_WIDTH ? MAX_ALLOWED_WIDTH : deviceWidth * 0.9,
     alignSelf: 'center',
-    marginTop: 60,
+    marginTop: 50,
     paddingBottom: 50,
   },
   addRemoveItem: {

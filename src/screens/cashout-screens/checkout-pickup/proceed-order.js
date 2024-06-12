@@ -83,7 +83,7 @@ export default function CheckoutPickupProceedScreen(props) {
       <View style={styles.buttonContainer}>
         <ActionButton
           title="Proceed"
-          // onPress={() => props.navigation.navigate('CheckoutDeliveryScreen')}
+          onPress={() => props.navigation.navigate('PaymentScreen')}
         />
       </View>
     </View>

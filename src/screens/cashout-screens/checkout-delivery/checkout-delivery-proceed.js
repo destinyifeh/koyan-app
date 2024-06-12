@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 import {ActionButton} from '../../../components/ActionButton';
@@ -91,7 +92,7 @@ export default function CheckoutDeliveryProceedScreen(props) {
           </View>
         </View>
         {isActive && (
-          <View style={{marginTop: 5}}>
+          <Animatable.View style={{marginTop: 5}} animation="slideInLeft">
             <Input
               title="Recipient Name"
               placeholder="Recipient Name"
@@ -120,7 +121,7 @@ export default function CheckoutDeliveryProceedScreen(props) {
               }}
               value={form?.address}
             />
-          </View>
+          </Animatable.View>
         )}
       </ScrollView>
       <View style={styles.buttonContainer}>

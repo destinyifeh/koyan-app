@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import orderChecked from '../../../../assets/icons/checked-order-icon.png';
 import orderCloseSheet from '../../../../assets/icons/close-order-sheet-icon.png';
 import orderDelivery from '../../../../assets/icons/order-delivery.png';
 import orderEat from '../../../../assets/icons/order-eat.png';
@@ -16,6 +15,7 @@ import orderPickup from '../../../../assets/icons/order-pickup.png';
 import orderUnchecked from '../../../../assets/icons/unchecked-order-icon.png';
 import {ActionButton} from '../../../../components/ActionButton';
 import {KoyanBottomDrawer} from '../../../../components/KoyanBottomDrawer';
+import {CheckBoxActive} from '../../../../components/checkbox';
 import {
   FONT_FAMILY_BODY,
   MAX_ALLOWED_WIDTH,
@@ -92,7 +92,7 @@ export const OrderTypeSheet = ({
                 handleSelectOrderType('eat', 'CheckoutEatInConfirmOrderScreen')
               }>
               {selectTypeval.eat ? (
-                <Image source={orderChecked} />
+                <CheckBoxActive />
               ) : (
                 <Image source={orderUnchecked} />
               )}
@@ -114,7 +114,7 @@ export const OrderTypeSheet = ({
                 )
               }>
               {selectTypeval.pickup ? (
-                <Image source={orderChecked} />
+                <CheckBoxActive />
               ) : (
                 <Image source={orderUnchecked} />
               )}
@@ -137,7 +137,7 @@ export const OrderTypeSheet = ({
                 )
               }>
               {selectTypeval.delivery ? (
-                <Image source={orderChecked} />
+                <CheckBoxActive />
               ) : (
                 <Image source={orderUnchecked} />
               )}

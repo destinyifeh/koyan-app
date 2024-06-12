@@ -27,6 +27,7 @@ export const Input = ({
   placeholderTextColor,
   titleStyle,
   mainContainerStyle,
+  maxLength,
 }) => {
   return (
     <View style={[styles.mainContainer, {...mainContainerStyle}]}>
@@ -49,12 +50,15 @@ export const Input = ({
               ? 'email-address'
               : inputType === 'phone'
               ? 'phone-pad'
+              : inputType === 'number'
+              ? 'number-pad'
               : 'default'
           }
           secureTextEntry={secureTextEntry}
           defaultValue={value}
           onChangeText={onChangeText}
           placeholderTextColor={placeholderTextColor}
+          maxLength={maxLength}
         />
         {rightIcon && (
           <TouchableOpacity

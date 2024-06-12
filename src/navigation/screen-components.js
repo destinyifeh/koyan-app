@@ -10,6 +10,8 @@ import OrderDescriptionScreen from '../screens/category-screens/eateries/order-d
 import {DashboardStack} from '../screens/dashboard/navigator';
 import LandingScreen from '../screens/landing';
 import LocationScreen from '../screens/location';
+import PaymentScreen from '../screens/payment-screens/payment';
+import PaymentSuccessScreen from '../screens/payment-screens/payment-success';
 import SplashScreen from '../screens/splashScreen';
 import ForgotPasswordScreen from '../screens/user-account/forgot-password';
 import LoginScreen from '../screens/user-account/login';
@@ -64,5 +66,14 @@ export const screenComponents = [
   {
     name: 'CheckoutPickupConfirmOrderScreen',
     component: CheckoutPickupConfirmOrderScreen,
+  },
+
+  {
+    name: 'PaymentScreen',
+    component: PaymentScreen,
+  },
+  {
+    name: 'PaymentSuccessScreen',
+    component: PaymentSuccessScreen,
   },
 ];
