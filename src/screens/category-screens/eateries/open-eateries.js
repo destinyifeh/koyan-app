@@ -35,10 +35,11 @@ const deviceHeight = Dimensions.get('window').height;
 export default function OpenEateriesScreen(props) {
   const [navValue, setNavValue] = React.useState(null);
   const [checkCart, setCheckCart] = React.useState(true);
+  const [isOrderType, setIsOrderType] = React.useState('');
   const sheetRef = React.useRef();
   const dispatch = useDispatch();
   const eateries = useSelector(state => state.eateries);
-
+  console.log(eateries.orderType, 'seatt');
   useFocusEffect(
     React.useCallback(() => {
       StatusBar.setBackgroundColor(COLOUR_WHITE);
@@ -48,10 +49,17 @@ export default function OpenEateriesScreen(props) {
 
   React.useEffect(() => {
     setNavValue('all');
-    sheetRef.current?.open();
-    handleInitialOrderType();
+    showOrderTypeSheet();
   }, []);
 
+  const showOrderTypeSheet = () => {
+    if (props.route.params?.fromEateries) {
+      sheetRef.current?.open();
+      handleInitialOrderType();
+    } else {
+      sheetRef.current?.close();
+    }
+  };
   const handleInitialOrderType = useCallback(() => {
     dispatch(
       getOrderChoice({
@@ -65,8 +73,14 @@ export default function OpenEateriesScreen(props) {
     setNavValue(nav);
   };
 
-  const handleCloseSheet = React.useCallback(() => {
-    sheetRef.current?.close();
+  const handleCloseSheet = React.useCallback(selected => {
+    console.log(selected, 'ortdeee');
+    if (selected.eat === true) {
+      props.navigation.navigate('EateryOrderTypeScreen');
+      sheetRef.current?.close();
+    } else {
+      return sheetRef.current?.close();
+    }
   }, []);
 
   const handleOrderType = useCallback(

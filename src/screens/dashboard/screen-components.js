@@ -1,3 +1,4 @@
+import EateryOrderTypeScreen from '../category-screens/eateries/eatery-order-type-screen';
 import ChnagePasswordScreen from './account-info/change-assword';
 import UpdateAccountScreen from './account-info/update-profile';
 import {DashboardTabs} from './navigator';
@@ -14,4 +15,5 @@ export const dashboardScreenComponents = [
   {name: 'OrderMapViewScreen', component: OrderMapViewScreen},
   {name: 'OngoingPickupScreen', component: OngoingPickupScreen},
   {name: 'OngoingEatinScreen', component: OngoingEatinScreen},
+  {name: 'EateryOrderTypeScreen', component: EateryOrderTypeScreen},
 ];

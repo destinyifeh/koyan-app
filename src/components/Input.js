@@ -8,7 +8,9 @@ import {
   textContentType,
 } from 'react-native';
 import {
+  COLOUR_RED,
   COLOUR__INPUT_TITLE,
+  FONT_FAMILY_BODY,
   FONT_FAMILY_BODY_SEMIBOLD,
 } from '../constants/Styles';
 
@@ -28,6 +30,7 @@ export const Input = ({
   titleStyle,
   mainContainerStyle,
   maxLength,
+  errorMessage,
 }) => {
   return (
     <View style={[styles.mainContainer, {...mainContainerStyle}]}>
@@ -68,6 +71,7 @@ export const Input = ({
           </TouchableOpacity>
         )}
       </View>
+      {errorMessage && <Text style={styles.errorText}> {errorMessage}</Text>}
     </View>
   );
 };
@@ -75,6 +79,13 @@ export const Input = ({
 const styles = StyleSheet.create({
   mainContainer: {
     marginTop: 25,
+  },
+  errorText: {
+    color: COLOUR_RED,
+    fontFamily: FONT_FAMILY_BODY,
+    fontSize: 14,
+    lineHeight: 16.8,
+    marginTop: 8,
   },
   inputContainer: {
     borderWidth: 1,

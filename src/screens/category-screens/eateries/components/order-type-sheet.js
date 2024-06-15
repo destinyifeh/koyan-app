@@ -144,7 +144,10 @@ export const OrderTypeSheet = ({
             </TouchableOpacity>
           </View>
         </View>
-        <ActionButton title="Proceed" onPress={handleCloseSheet} />
+        <ActionButton
+          title="Proceed"
+          onPress={() => handleCloseSheet(selectTypeval)}
+        />
       </ScrollView>
     </KoyanBottomDrawer>
   );

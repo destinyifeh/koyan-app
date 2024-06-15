@@ -13,6 +13,7 @@ import {
 import Feather from 'react-native-vector-icons/Feather';
 import pickupLogo from '../../../assets/media/pickup-owner-logo.png';
 
+import {useSelector} from 'react-redux';
 import {ActionButton} from '../../../components/ActionButton';
 import {CheckoutProgressTwo} from '../../../components/checkout-progress';
 import {FONT_FAMILY_BODY, MAX_ALLOWED_WIDTH} from '../../../constants/Styles';
@@ -22,7 +23,7 @@ const deviceWidth = Dimensions.get('window').width;
 export default function CheckoutEatInProceedScreen(props) {
   const [isActive, setIsActive] = React.useState(false);
   const [form, setForm] = useState('');
-
+  const eateries = useSelector(state => state.eateries);
   useFocusEffect(
     React.useCallback(() => {
       StatusBar.setBackgroundColor('transparent');
@@ -69,18 +70,29 @@ export default function CheckoutEatInProceedScreen(props) {
               <Image source={pickupLogo} />
 
               <View>
-                <Text style={styles.descText}>The Place Restaurant</Text>
-                <Text style={styles.placeText}>Palm Avenue, Ilupeju</Text>
+                <Text style={styles.descText}>Seat</Text>
+                <Text style={styles.seat}>{eateries.seatNumber}</Text>
               </View>
             </View>
-            <Text style={[styles.placeText, {fontSize: 12}]}>4mins Away</Text>
+            <TouchableOpacity
+              onPress={() =>
+                props.navigation.navigate('EateryOrderTypeScreen', {
+                  fromChangeSeat: true,
+                })
+              }
+              style={styles.changeSeatContainer}>
+              <Text
+                style={[styles.placeText, {fontSize: 13, color: '#74AAF0'}]}>
+                {eateries.seatNumber ? 'Change Seat' : 'Select Seat'}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
       <View style={styles.buttonContainer}>
         <ActionButton
           title="Proceed"
-          // onPress={() => props.navigation.navigate('CheckoutDeliveryScreen')}
+          onPress={() => props.navigation.navigate('PaymentScreen')}
         />
       </View>
     </View>
@@ -175,6 +187,23 @@ const styles = StyleSheet.create({
     lineHeight: 16.8,
     color: '#757C7D',
   },
+  seat: {
+    fontFamily: FONT_FAMILY_BODY,
+    fontSize: 16,
+    fontWeight: '500',
+    lineHeight: 19.2,
+    color: '#192426',
+  },
+
+  changeSeatContainer: {
+    width: 115,
+    height: 35,
+    borderRadius: 400,
+    backgroundColor: 'rgba(116, 170, 240, 0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   infoContainer: {
     flexDirection: 'row',
     alignItems: 'center',

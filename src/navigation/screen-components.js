@@ -5,6 +5,7 @@ import CheckoutEatInProceedScreen from '../screens/cashout-screens/checkout-eat-
 import CheckoutPickupConfirmOrderScreen from '../screens/cashout-screens/checkout-pickup/confirm-order';
 import CheckoutPickupProceedScreen from '../screens/cashout-screens/checkout-pickup/proceed-order';
 import EateriesScreen from '../screens/category-screens/eateries';
+import EateryOrderTypeScreen from '../screens/category-screens/eateries/eatery-order-type-screen';
 import OpenEateriesScreen from '../screens/category-screens/eateries/open-eateries';
 import OrderDescriptionScreen from '../screens/category-screens/eateries/order-description';
 import {DashboardStack} from '../screens/dashboard/navigator';
@@ -76,4 +77,5 @@ export const screenComponents = [
     name: 'PaymentSuccessScreen',
     component: PaymentSuccessScreen,
   },
+  {name: 'EateryOrderTypeScreen', component: EateryOrderTypeScreen},
 ];

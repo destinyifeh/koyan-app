@@ -297,12 +297,12 @@ export default function QRScreen(props) {
             <View style={{width: '70%', alignSelf: 'center'}}>
               <ActionButton
                 title="Continue Shopping"
-                onPress={() => props.navigation.navigate('Home')}
+                onPress={() => handleContentChange('proceedContent')}
               />
 
               <ActionButton
                 onPress={() =>
-                  props.navigation.navigate('CheckoutPickupConfirmOrderScreen')
+                  props.navigation.navigate('CheckoutEatInConfirmOrderScreen')
                 }
                 title="Proceed to Checkout"
                 backgroundcolor="transparent"

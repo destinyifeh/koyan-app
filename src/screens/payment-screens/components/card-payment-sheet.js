@@ -2,6 +2,8 @@ import React from 'react';
 import {
   Dimensions,
   Image,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -48,70 +50,79 @@ export const CardPaymentSheet = ({
             <Image source={closeButton} />
           </TouchableOpacity>
         </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{flex: 1}}
+          keyboardVerticalOffset={Platform.select({ios: 0, android: 300})}>
+          <ScrollView
+            contentInsetAdjustmentBehavior="always"
+            overScrollMode="always"
+            style={styles.itemMainContainer}>
+            <Input
+              title="Name on Card"
+              placeholder="Card Holder Name"
+              onChangeText={cardName => {
+                updateCardPaymentFormField({cardName});
+              }}
+              value={cardPaymentForm.cardName}
+              leftIcon={
+                <AntDesign name="user" size={18} color="rgba(0, 0, 0, 0.2)" />
+              }
+            />
 
-        <View style={styles.itemMainContainer}>
-          <Input
-            title="Name on Card"
-            placeholder="Card Holder Name"
-            onChangeText={cardName => {
-              updateCardPaymentFormField({cardName});
-            }}
-            value={cardPaymentForm.cardName}
-            leftIcon={
-              <AntDesign name="user" size={18} color="rgba(0, 0, 0, 0.2)" />
-            }
-          />
+            <Input
+              title="Card Number"
+              placeholder="0123 4567 8901 2345"
+              inputType="number"
+              onChangeText={cardNumber => {
+                const formattedCardNumber = formatCardNumber(cardNumber);
+                updateCardPaymentFormField({cardNumber: formattedCardNumber});
+              }}
+              maxLength={19}
+              value={cardPaymentForm.cardNumber}
+              leftIcon={
+                <Ionicons
+                  name="card-outline"
+                  size={18}
+                  color="rgba(0, 0, 0, 0.2)"
+                />
+              }
+            />
 
-          <Input
-            title="Card Number"
-            placeholder="0123 4567 8901 2345"
-            inputType="number"
-            onChangeText={cardNumber => {
-              const formattedCardNumber = formatCardNumber(cardNumber);
-              updateCardPaymentFormField({cardNumber: formattedCardNumber});
-            }}
-            maxLength={19}
-            value={cardPaymentForm.cardNumber}
-            leftIcon={
-              <Ionicons
-                name="card-outline"
-                size={18}
-                color="rgba(0, 0, 0, 0.2)"
+            <View style={styles.itemContainer}>
+              <Input
+                title="Expiry Date"
+                placeholder="MM / YY"
+                inputType="number"
+                onChangeText={expiryDate => {
+                  const formattedDate = formatExpiryDate(expiryDate);
+                  updateCardPaymentFormField({expiryDate: formattedDate});
+                }}
+                value={cardPaymentForm.expiryDate}
+                mainContainerStyle={{width: 144}}
+                maxLength={5}
               />
-            }
-          />
 
-          <View style={styles.itemContainer}>
-            <Input
-              title="Expiry Date"
-              placeholder="MM / YY"
-              inputType="number"
-              onChangeText={expiryDate => {
-                const formattedDate = formatExpiryDate(expiryDate);
-                updateCardPaymentFormField({expiryDate: formattedDate});
-              }}
-              value={cardPaymentForm.expiryDate}
-              mainContainerStyle={{width: 144}}
-              maxLength={5}
-            />
-
-            <Input
-              title="CVV"
-              placeholder="012"
-              inputType="number"
-              onChangeText={cvv => {
-                updateCardPaymentFormField({cvv});
-              }}
-              mainContainerStyle={{width: 144}}
-              value={cardPaymentForm.cvv}
-              maxLength={3}
-            />
-          </View>
-        </View>
-
-        <View style={styles.buttonContainer}>
-          <ActionButton onPress={onPaymentCompleted} title="Process Payment" />
-        </View>
+              <Input
+                title="CVV"
+                placeholder="012"
+                inputType="number"
+                onChangeText={cvv => {
+                  updateCardPaymentFormField({cvv});
+                }}
+                mainContainerStyle={{width: 144}}
+                value={cardPaymentForm.cvv}
+                maxLength={3}
+              />
+            </View>
+            <View style={styles.buttonContainer}>
+              <ActionButton
+                onPress={onPaymentCompleted}
+                title="Process Payment"
+              />
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </ScrollView>
     </KoyanBottomDrawer>
   );
@@ -172,7 +183,8 @@ const styles = StyleSheet.create({
   },
 
   itemMainContainer: {
-    marginTop: 40,
+    paddingTop: 10,
+    flex: 1,
   },
 
   itemContainer: {

@@ -24,7 +24,9 @@ export const AllEateries = () => {
           justifyContent: 'space-between',
         }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('OpenEateries')}
+          onPress={() =>
+            navigation.navigate('OpenEateries', {fromEateries: true})
+          }
           style={{flexDirection: 'row', alignItems: 'center', gap: 5}}>
           <Image
             source={restaurantitem}
