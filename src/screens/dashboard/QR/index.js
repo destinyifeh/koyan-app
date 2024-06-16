@@ -4,6 +4,7 @@ import {
   Dimensions,
   Image,
   ImageBackground,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -47,10 +48,13 @@ export default function QRScreen(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor('transparent');
-      StatusBar.setTranslucent(true);
-      StatusBar.setBarStyle('white-content');
+      StatusBar.setBarStyle('light-content');
       setScanContents('ProceedContent');
+
+      if (Platform.OS === 'android') {
+        StatusBar.setBackgroundColor('transparent');
+        StatusBar.setTranslucent(true);
+      }
     }, []),
   );
 

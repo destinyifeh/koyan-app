@@ -1,23 +1,23 @@
+import {useFocusEffect} from '@react-navigation/native';
 import React, {useEffect, useRef, useState} from 'react';
 import {
-  Text,
-  View,
-  StyleSheet,
   Dimensions,
+  Platform,
+  SafeAreaView,
   StatusBar,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import {VerifyForm} from './components/VerifyForm';
+import Feather from 'react-native-vector-icons/Feather';
 import {
-  COLOUR_GHOST_WHITE,
   COLOUR_WHITE,
   FONT_FAMILY_BODY,
   FONT_FAMILY_BODY_SEMIBOLD,
   MAX_ALLOWED_WIDTH,
 } from '../../../constants/Styles';
-import Feather from 'react-native-vector-icons/Feather';
-import {useFocusEffect} from '@react-navigation/native';
-import {KoyanBottomDrawer} from '../../../components/KoyanBottomDrawer';
+import {VerifyForm} from './components/VerifyForm';
 import {VerifyModal} from './components/VerifyModal';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -28,7 +28,7 @@ export default function VerifyEmailScreen(props) {
   const [isSent, setIsSent] = useState(false);
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_WHITE);
+      Platform.OS === 'android' && StatusBar.setBackgroundColor(COLOUR_WHITE);
 
       StatusBar.setBarStyle('dark-content');
     }, []),
@@ -49,6 +49,11 @@ export default function VerifyEmailScreen(props) {
     try {
       _ref.current?.open();
       setSeconds(54);
+      if (Platform.OS === 'ios') {
+        _ref.current?.close();
+        props.navigation.replace('VerifyEmail');
+        props.navigation.replace('VerifiedUser');
+      }
       setTimeout(() => {
         _ref.current?.close();
         props.navigation.replace('VerifyEmail');
@@ -61,7 +66,7 @@ export default function VerifyEmailScreen(props) {
   }
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.contentContainer}>
+      <SafeAreaView style={styles.contentContainer}>
         <TouchableOpacity
           style={styles.goBackContainer}
           onPress={() => props.navigation.goBack()}>
@@ -93,7 +98,7 @@ export default function VerifyEmailScreen(props) {
           refRBSheet={_ref}
           height={deviceHeight * 0.83}
         />
-      </View>
+      </SafeAreaView>
     </View>
   );
 }

@@ -2,6 +2,8 @@ import {useFocusEffect} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   Dimensions,
+  Platform,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -31,9 +33,11 @@ export default function CheckoutDeliveryProceedScreen(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor('transparent');
-      StatusBar.setTranslucent(true);
       StatusBar.setBarStyle('dark-content');
+      if (Platform.OS === 'android') {
+        StatusBar.setBackgroundColor('transparent');
+        StatusBar.setTranslucent(true);
+      }
     }, []),
   );
 
@@ -52,78 +56,80 @@ export default function CheckoutDeliveryProceedScreen(props) {
   };
   return (
     <View style={styles.mainContainer}>
-      <ScrollView
-        style={styles.contentContainer}
-        contentContainerStyle={{
-          paddingBottom: 50,
-        }}>
-        <View style={styles.headerContainer}>
-          <TouchableOpacity
-            style={{}}
-            onPress={() => props.navigation.goBack()}>
-            <Feather name="arrow-left" size={20} color="#000000" />
-          </TouchableOpacity>
-          <Text style={styles.titleText}>Checkout</Text>
-        </View>
-        <View style={{marginVertical: 30}}>
-          <CheckoutProgressTwo />
-        </View>
-        <View style={{marginTop: 5}}>
-          <Text style={styles.orderText}>Delivery Details</Text>
-          <View style={{marginBottom: 20}}>
-            <CheckoutBar />
-          </View>
-          <View style={styles.infoContainer}>
-            <View style={{gap: 3}}>
-              <Text style={styles.descText}>
-                Is this order for someone else?
-              </Text>
-              <Text style={styles.helpText}>
-                Add their details to help the courier
-              </Text>
-            </View>
-            <TouchableOpacity onPress={onToggle}>
-              <Entypo
-                name="switch"
-                size={35}
-                color={!isActive ? '#D3E4FB' : COLOUR_LIGHT_BLUE}
-              />
+      <SafeAreaView style={styles.contentContainer}>
+        <ScrollView
+          style={{flex: 1}}
+          contentContainerStyle={{
+            paddingBottom: 50,
+          }}>
+          <View style={styles.headerContainer}>
+            <TouchableOpacity
+              style={{}}
+              onPress={() => props.navigation.goBack()}>
+              <Feather name="arrow-left" size={20} color="#000000" />
             </TouchableOpacity>
+            <Text style={styles.titleText}>Checkout</Text>
           </View>
-        </View>
-        {isActive && (
-          <Animatable.View style={{marginTop: 5}} animation="slideInLeft">
-            <Input
-              title="Recipient Name"
-              placeholder="Recipient Name"
-              onChangeText={name => {
-                updateFormField({name});
-              }}
-              value={form?.name}
-            />
+          <View style={{marginVertical: 30}}>
+            <CheckoutProgressTwo />
+          </View>
+          <View style={{marginTop: 5}}>
+            <Text style={styles.orderText}>Delivery Details</Text>
+            <View style={{marginBottom: 20}}>
+              <CheckoutBar />
+            </View>
+            <View style={styles.infoContainer}>
+              <View style={{gap: 3}}>
+                <Text style={styles.descText}>
+                  Is this order for someone else?
+                </Text>
+                <Text style={styles.helpText}>
+                  Add their details to help the courier
+                </Text>
+              </View>
+              <TouchableOpacity onPress={onToggle}>
+                <Entypo
+                  name="switch"
+                  size={35}
+                  color={!isActive ? '#D3E4FB' : COLOUR_LIGHT_BLUE}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          {isActive && (
+            <Animatable.View style={{marginTop: 5}} animation="slideInLeft">
+              <Input
+                title="Recipient Name"
+                placeholder="Recipient Name"
+                onChangeText={name => {
+                  updateFormField({name});
+                }}
+                value={form?.name}
+              />
 
-            <Input
-              title="Recipient Phone Number"
-              placeholder="Recipient Phone Number"
-              inputType="phone"
-              onChangeText={phone => {
-                updateFormField({phone});
-              }}
-              value={form?.phone}
-            />
+              <Input
+                title="Recipient Phone Number"
+                placeholder="Recipient Phone Number"
+                inputType="phone"
+                onChangeText={phone => {
+                  updateFormField({phone});
+                }}
+                value={form?.phone}
+              />
 
-            <Input
-              title="Recipient Address"
-              placeholder="Recipient Address"
-              inputType="address"
-              onChangeText={address => {
-                updateFormField({address});
-              }}
-              value={form?.address}
-            />
-          </Animatable.View>
-        )}
-      </ScrollView>
+              <Input
+                title="Recipient Address"
+                placeholder="Recipient Address"
+                inputType="address"
+                onChangeText={address => {
+                  updateFormField({address});
+                }}
+                value={form?.address}
+              />
+            </Animatable.View>
+          )}
+        </ScrollView>
+      </SafeAreaView>
       <View style={styles.buttonContainer}>
         <ActionButton
           title="Proceed"

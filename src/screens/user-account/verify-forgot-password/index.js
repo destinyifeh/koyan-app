@@ -2,6 +2,8 @@ import {useFocusEffect} from '@react-navigation/native';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Dimensions,
+  Platform,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
@@ -23,9 +25,10 @@ export default function VerifyForgotPasswordEmailScreen(props) {
   const _ref = useRef();
   const [seconds, setSeconds] = useState(61);
   const [isSent, setIsSent] = useState(false);
+
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_WHITE);
+      Platform.OS === 'android' && StatusBar.setBackgroundColor(COLOUR_WHITE);
 
       StatusBar.setBarStyle('dark-content');
     }, []),
@@ -46,6 +49,11 @@ export default function VerifyForgotPasswordEmailScreen(props) {
     try {
       _ref.current?.open();
       setSeconds(0);
+      if (Platform.OS === 'ios') {
+        _ref.current?.close();
+        props.navigation.replace('VerifyForgotPasswordEmail');
+        props.navigation.replace('ResetPassword');
+      }
       setTimeout(() => {
         _ref.current?.close();
         props.navigation.replace('VerifyForgotPasswordEmail');
@@ -58,7 +66,7 @@ export default function VerifyForgotPasswordEmailScreen(props) {
   }
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.contentContainer}>
+      <SafeAreaView style={styles.contentContainer}>
         {/* <TouchableOpacity
           style={styles.goBackContainer}
           onPress={() => props.navigation.goBack()}>
@@ -94,7 +102,7 @@ export default function VerifyForgotPasswordEmailScreen(props) {
           refRBSheet={_ref}
           height={deviceHeight * 0.83}
         />
-      </View>
+      </SafeAreaView>
     </View>
   );
 }

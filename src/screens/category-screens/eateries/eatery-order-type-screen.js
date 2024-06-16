@@ -4,6 +4,8 @@ import {useFocusEffect} from '@react-navigation/native';
 import {
   Dimensions,
   Image,
+  Platform,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -39,7 +41,7 @@ export default function EateryOrderTypeScreen(props) {
   console.log(props.route.params, 'paramss');
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_WHITE);
+      Platform.OS === 'android' && StatusBar.setBackgroundColor(COLOUR_WHITE);
       StatusBar.setBarStyle('dark-content');
     }, []),
   );
@@ -64,7 +66,7 @@ export default function EateryOrderTypeScreen(props) {
   };
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.contentContainer}>
+      <SafeAreaView style={styles.contentContainer}>
         <View style={styles.headerContainer}>
           <View style={styles.headerInnerContainer}>
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
@@ -99,7 +101,7 @@ export default function EateryOrderTypeScreen(props) {
             <AntDesign name="down" size={16} color="#000000" />
           </TouchableOpacity>
         </View>
-      </View>
+      </SafeAreaView>
       <View style={styles.btContainer}>
         <ActionButton
           title="Proceed"

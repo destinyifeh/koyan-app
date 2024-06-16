@@ -4,6 +4,7 @@ import {
   Dimensions,
   Image,
   ImageBackground,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -33,7 +34,7 @@ const deviceHeight = Dimensions.get('window').height;
 export default function LocationScreen(props) {
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_WHITE);
+      Platform.OS === 'android' && StatusBar.setBackgroundColor(COLOUR_WHITE);
       StatusBar.setBarStyle('dark-content');
     }, []),
   );

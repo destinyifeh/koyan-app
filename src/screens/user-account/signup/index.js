@@ -1,30 +1,23 @@
-import React, {useState, useEffect} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import React, {useState} from 'react';
 import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
   Dimensions,
+  Platform,
+  SafeAreaView,
+  ScrollView,
   StatusBar,
+  StyleSheet,
+  Text,
   TouchableOpacity,
-  Image,
+  View,
 } from 'react-native';
-import {Input} from '../../../components/Input';
 import {
-  COLOUR_GHOST_WHITE,
-  COLOUR_LIGHT_BLUE,
   COLOUR_WHITE,
   FONT_FAMILY_BODY,
-  FONT_FAMILY_BODY_BOLD,
   FONT_FAMILY_BODY_SEMIBOLD,
   MAX_ALLOWED_WIDTH,
 } from '../../../constants/Styles';
-import {useFocusEffect} from '@react-navigation/native';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
-import flag from '../../../assets/media/nigeriaColor.png';
-import {ActionButton} from '../../../components/ActionButton';
 import SignupForm from './components/signupForrm';
 const deviceWidth = Dimensions.get('window').width;
 export default function SignupScreen(props) {
@@ -32,8 +25,7 @@ export default function SignupScreen(props) {
   const [form, setForm] = useState('');
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_WHITE);
-
+      Platform.OS === 'android' && StatusBar.setBackgroundColor(COLOUR_WHITE);
       StatusBar.setBarStyle('dark-content');
     }, []),
   );
@@ -51,7 +43,7 @@ export default function SignupScreen(props) {
     <ScrollView
       style={styles.mainContainer}
       showsVerticalScrollIndicator={false}>
-      <View style={styles.contentContainer}>
+      <SafeAreaView style={styles.contentContainer}>
         <View>
           <Text style={styles.titleText}>Create your account</Text>
           <View style={styles.descContainer}>
@@ -64,7 +56,7 @@ export default function SignupScreen(props) {
         </View>
 
         <SignupForm updateFormField={updateFormField} />
-      </View>
+      </SafeAreaView>
     </ScrollView>
   );
 }

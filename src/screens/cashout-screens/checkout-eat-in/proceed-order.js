@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import {
   Dimensions,
   Image,
+  Platform,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -26,9 +28,11 @@ export default function CheckoutEatInProceedScreen(props) {
   const eateries = useSelector(state => state.eateries);
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor('transparent');
-      StatusBar.setTranslucent(true);
       StatusBar.setBarStyle('dark-content');
+      if (Platform.OS === 'android') {
+        StatusBar.setBackgroundColor('transparent');
+        StatusBar.setTranslucent(true);
+      }
     }, []),
   );
 
@@ -47,48 +51,50 @@ export default function CheckoutEatInProceedScreen(props) {
   };
   return (
     <View style={styles.mainContainer}>
-      <ScrollView
-        style={styles.contentContainer}
-        contentContainerStyle={{
-          paddingBottom: 50,
-        }}>
-        <View style={styles.headerContainer}>
-          <TouchableOpacity
-            style={{}}
-            onPress={() => props.navigation.goBack()}>
-            <Feather name="arrow-left" size={20} color="#000000" />
-          </TouchableOpacity>
-          <Text style={styles.titleText}>Checkout</Text>
-        </View>
-        <View style={{marginVertical: 30}}>
-          <CheckoutProgressTwo />
-        </View>
-        <View style={{marginTop: 5}}>
-          <Text style={styles.orderText}>Eat-in Details</Text>
-          <View style={styles.descContainer}>
-            <View style={styles.infoContainer}>
-              <Image source={pickupLogo} />
-
-              <View>
-                <Text style={styles.descText}>Seat</Text>
-                <Text style={styles.seat}>{eateries.seatNumber}</Text>
-              </View>
-            </View>
+      <SafeAreaView style={styles.contentContainer}>
+        <ScrollView
+          style={{flex: 1}}
+          contentContainerStyle={{
+            paddingBottom: 50,
+          }}>
+          <View style={styles.headerContainer}>
             <TouchableOpacity
-              onPress={() =>
-                props.navigation.navigate('EateryOrderTypeScreen', {
-                  fromChangeSeat: true,
-                })
-              }
-              style={styles.changeSeatContainer}>
-              <Text
-                style={[styles.placeText, {fontSize: 13, color: '#74AAF0'}]}>
-                {eateries.seatNumber ? 'Change Seat' : 'Select Seat'}
-              </Text>
+              style={{}}
+              onPress={() => props.navigation.goBack()}>
+              <Feather name="arrow-left" size={20} color="#000000" />
             </TouchableOpacity>
+            <Text style={styles.titleText}>Checkout</Text>
           </View>
-        </View>
-      </ScrollView>
+          <View style={{marginVertical: 30}}>
+            <CheckoutProgressTwo />
+          </View>
+          <View style={{marginTop: 5}}>
+            <Text style={styles.orderText}>Eat-in Details</Text>
+            <View style={styles.descContainer}>
+              <View style={styles.infoContainer}>
+                <Image source={pickupLogo} />
+
+                <View>
+                  <Text style={styles.descText}>Seat</Text>
+                  <Text style={styles.seat}>{eateries.seatNumber}</Text>
+                </View>
+              </View>
+              <TouchableOpacity
+                onPress={() =>
+                  props.navigation.navigate('EateryOrderTypeScreen', {
+                    fromChangeSeat: true,
+                  })
+                }
+                style={styles.changeSeatContainer}>
+                <Text
+                  style={[styles.placeText, {fontSize: 13, color: '#74AAF0'}]}>
+                  {eateries.seatNumber ? 'Change Seat' : 'Select Seat'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
       <View style={styles.buttonContainer}>
         <ActionButton
           title="Proceed"

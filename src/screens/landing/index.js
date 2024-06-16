@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Dimensions,
   Image,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -21,7 +22,8 @@ const deviceWidth = Dimensions.get('window').width;
 export default function LandingScreen(props) {
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_LIGHT_BLUE);
+      Platform.OS === 'android' &&
+        StatusBar.setBackgroundColor(COLOUR_LIGHT_BLUE);
       StatusBar.setBarStyle('light-content');
     }, []),
   );

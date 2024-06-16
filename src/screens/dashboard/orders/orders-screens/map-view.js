@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {
   ActivityIndicator,
   Dimensions,
+  Platform,
   StatusBar,
   StyleSheet,
   Text,
@@ -28,9 +29,11 @@ export default function OrderMapViewScreen(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor('transparent');
-      StatusBar.setTranslucent(true);
       StatusBar.setBarStyle('dark-content');
+      if (Platform.OS === 'android') {
+        StatusBar.setBackgroundColor('transparent');
+        StatusBar.setTranslucent(true);
+      }
     }, []),
   );
 
@@ -53,7 +56,7 @@ export default function OrderMapViewScreen(props) {
       <View
         style={{
           position: 'absolute',
-          top: 60,
+          top: Platform.OS === 'android' ? 60 : 85,
           left: 10,
           zIndex: 10,
           backgroundColor: 'black',

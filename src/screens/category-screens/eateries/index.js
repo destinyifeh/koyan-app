@@ -1,4 +1,10 @@
-import {StatusBar, TouchableOpacity, View} from 'react-native';
+import {
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Input} from '../../../components/Input';
 
 import React from 'react';
@@ -22,13 +28,13 @@ const deviceHeight = Dimensions.get('window').height;
 export default function EateriesScreen(props) {
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_WHITE);
+      Platform.OS === 'android' && StatusBar.setBackgroundColor(COLOUR_WHITE);
       StatusBar.setBarStyle('dark-content');
     }, []),
   );
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.contentContainer}>
+      <SafeAreaView style={styles.contentContainer}>
         <View style={styles.headerContainer}>
           <View style={styles.headerInnerContainer}>
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
@@ -66,7 +72,7 @@ export default function EateriesScreen(props) {
           <AllEateries />
           <AllEateries />
         </View>
-      </View>
+      </SafeAreaView>
     </View>
   );
 }

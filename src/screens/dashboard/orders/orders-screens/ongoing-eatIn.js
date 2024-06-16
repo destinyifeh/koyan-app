@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import {
   Dimensions,
   Image,
+  Platform,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -36,9 +38,11 @@ export default function OngoingEatinScreen(props) {
   const eateries = useSelector(state => state.eateries);
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor('transparent');
-      StatusBar.setTranslucent(true);
       StatusBar.setBarStyle('dark-content');
+      if (Platform.OS === 'android') {
+        StatusBar.setBackgroundColor('transparent');
+        StatusBar.setTranslucent(true);
+      }
     }, []),
   );
 
@@ -71,7 +75,7 @@ export default function OngoingEatinScreen(props) {
     <View style={styles.mainContainer}>
       <ScrollView style={styles.mainInnerContainer}>
         <View style={styles.contentInfoContainer}>
-          <View style={styles.contentContainer}>
+          <SafeAreaView style={styles.contentContainer}>
             <View style={styles.headerContainer}>
               <TouchableOpacity
                 style={{}}
@@ -133,7 +137,7 @@ export default function OngoingEatinScreen(props) {
                 </View> */}
               </View>
             </View>
-          </View>
+          </SafeAreaView>
         </View>
 
         <View style={[styles.contentContainer, {marginTop: 20}]}>

@@ -84,7 +84,7 @@ export default function ChnagePasswordScreen(props) {
 
           <View style={styles.buttonView}>
             <ActionButton
-              onPress={() => navigation.navigate('PasswordChangedSuccess')}
+              //  onPress={() => navigation.navigate('PasswordChangedSuccess')}
               title="Done"
               disabled={false}
             />

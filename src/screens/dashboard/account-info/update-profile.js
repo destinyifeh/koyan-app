@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {
   Dimensions,
   Image,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -28,7 +29,8 @@ export default function UpdateAccountScreen(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_LIGHT_BLUE);
+      Platform.OS === 'android' &&
+        StatusBar.setBackgroundColor(COLOUR_LIGHT_BLUE);
 
       StatusBar.setBarStyle('light-content');
     }, []),
@@ -120,7 +122,7 @@ export default function UpdateAccountScreen(props) {
 
             <View style={styles.buttonView}>
               <ActionButton
-                onPress={() => navigation.navigate('VerifyEmail')}
+                //onPress={() => props.navigation.navigate('VerifyEmail')}
                 title="Save"
                 disabled={false}
               />

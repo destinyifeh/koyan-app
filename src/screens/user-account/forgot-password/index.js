@@ -1,8 +1,14 @@
-import React, {useState} from 'react';
-import {Dimensions, StatusBar, StyleSheet, Text, View} from 'react-native';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useFocusEffect} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {
+  Dimensions,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {
   COLOUR_WHITE,
   FONT_FAMILY_BODY,
@@ -16,7 +22,7 @@ export default function ForgotPasswordScreen() {
   const [form, setForm] = useState('');
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_WHITE);
+      Platform.OS === 'android' && StatusBar.setBackgroundColor(COLOUR_WHITE);
 
       StatusBar.setBarStyle('dark-content');
     }, []),
@@ -33,7 +39,7 @@ export default function ForgotPasswordScreen() {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.contentContainer}>
+      <SafeAreaView style={styles.contentContainer}>
         <Text style={styles.titleText}>Provide Email</Text>
         <View style={styles.descContainer}>
           <Text style={styles.descText}>
@@ -42,7 +48,7 @@ export default function ForgotPasswordScreen() {
           </Text>
         </View>
         <ForgotForm updateFormField={updateFormField} email={form?.email} />
-      </View>
+      </SafeAreaView>
     </View>
   );
 }

@@ -1,0 +1,223 @@
+[
+  {
+    "name": "The Place Restaurant",
+    "state": "lagos",
+    "location": "Ilupeju",
+    "delivery": "Free delivery",
+    "logo": "../media/resturant-item.png",
+    "rate": "5.0",
+    "id": "1",
+    "details": {
+      "price": "N1500",
+      "meal": "Jollof Rice and Curry Chicken - Belleful Meal",
+      "image": "../../assets/media/resturant-item.png",
+      "userLike": "",
+      "desc": "Two mouth watering pieces of soulfully spiced Jollof rice + a refreshing PET drink.",
+      "takeAway": "Take-away Pack (1,000ml with Lid)",
+      "drink1": "Eva water 50cl PET",
+      "drink1Price": "N1200",
+      "drink2": "Fanta Orange 35cl PET",
+      "drink2Price": "N1300",
+      "category": "top-sellers"
+    }
+  },
+  {
+    "name": "Breadline Cafe",
+    "state": "lagos",
+    "location": "Lekki",
+    "delivery": "Free delivery",
+    "logo": "../media/resturant-item.png",
+    "rate": "5.0",
+    "id": "2",
+    "details": {
+      "price": "N1500",
+      "meal": "Jollof Rice and Curry Chicken - Belleful Meal",
+      "image": "../../assets/media/resturant-item.png",
+      "userLike": "",
+      "desc": "Two mouth watering pieces of soulfully spiced Jollof rice + a refreshing PET drink.",
+      "takeAway": "Take-away Pack (1,000ml with Lid)",
+      "drink1": "Eva water 50cl PET",
+      "drink1Price": "N1200",
+      "drink2": "Fanta Orange 35cl PET",
+      "drink2Price": "N1300",
+      "category": "top-sellers"
+    }
+  },
+  {
+    "name": "Bukka Hut",
+    "state": "lagos",
+    "location": "Lekki",
+    "delivery": "Free delivery",
+    "logo": "../media/resturant-item.png",
+    "rate": "5.0",
+    "id": "3",
+    "details": {
+      "price": "N1500",
+      "meal": "Jollof Rice and Curry Chicken - Belleful Meal",
+      "image": "../../assets/media/resturant-item.png",
+      "userLike": "",
+      "desc": "Two mouth watering pieces of soulfully spiced Jollof rice + a refreshing PET drink.",
+      "takeAway": "Take-away Pack (1,000ml with Lid)",
+      "drink1": "Eva water 50cl PET",
+      "drink1Price": "N1200",
+      "drink2": "Fanta Orange 35cl PET",
+      "drink2Price": "N1300",
+      "category": "top-sellers"
+    }
+  },
+  {
+    "name": "So Fresh",
+    "state": "lagos",
+    "location": "Lekki",
+    "delivery": "Free delivery",
+    "logo": "../media/resturant-item.png",
+    "rate": "5.0",
+    "id": "4",
+    "details": {
+      "price": "N1500",
+      "meal": "Jollof Rice and Curry Chicken - Belleful Meal",
+      "image": "../../assets/media/resturant-item.png",
+      "userLike": "",
+      "desc": "Two mouth watering pieces of soulfully spiced Jollof rice + a refreshing PET drink.",
+      "takeAway": "Take-away Pack (1,000ml with Lid)",
+      "drink1": "Eva water 50cl PET",
+      "drink1Price": "N1200",
+      "drink2": "Fanta Orange 35cl PET",
+      "drink2Price": "N1300",
+      "category": "top-sellers"
+    }
+  },
+  {
+    "name": "Chicken Republic",
+    "state": "lagos",
+    "location": "Lekki",
+    "delivery": "Free delivery",
+    "logo": "../media/resturant-item.png",
+    "rate": "5.0",
+    "id": "5",
+    "details": {
+      "price": "N1500",
+      "meal": "Jollof Rice and Curry Chicken - Belleful Meal",
+      "image": "../../assets/media/resturant-item.png",
+      "userLike": "",
+      "desc": "Two mouth watering pieces of soulfully spiced Jollof rice + a refreshing PET drink.",
+      "takeAway": "Take-away Pack (1,000ml with Lid)",
+      "drink1": "Eva water 50cl PET",
+      "drink1Price": "N1200",
+      "drink2": "Fanta Orange 35cl PET",
+      "drink2Price": "N1300",
+      "category": "top-sellers"
+    }
+  },
+
+  {
+    "name": "The Place Restaurant",
+    "state": "lagos",
+    "location": "Ikorodu",
+    "delivery": "Free delivery",
+    "logo": "../media/resturant-item.png",
+    "rate": "5.0",
+    "id": "6",
+    "details": {
+      "price": "N1500",
+      "meal": "Jollof Rice and Curry Chicken - Belleful Meal",
+      "image": "../../assets/media/resturant-item.png",
+      "userLike": "",
+      "desc": "Two mouth watering pieces of soulfully spiced Jollof rice + a refreshing PET drink.",
+      "takeAway": "Take-away Pack (1,000ml with Lid)",
+      "drink1": "Eva water 50cl PET",
+      "drink1Price": "N1200",
+      "drink2": "Fanta Orange 35cl PET",
+      "drink2Price": "N1300",
+      "category": "top-sellers"
+    }
+  },
+  {
+    "name": "Breadline Cafe",
+    "state": "lagos",
+    "location": "Ikorodu",
+    "delivery": "Free delivery",
+    "logo": "../media/resturant-item.png",
+    "rate": "5.0",
+    "id": "7",
+    "details": {
+      "price": "N1500",
+      "meal": "Jollof Rice and Curry Chicken - Belleful Meal",
+      "image": "../../assets/media/resturant-item.png",
+      "userLike": "",
+      "desc": "Two mouth watering pieces of soulfully spiced Jollof rice + a refreshing PET drink.",
+      "takeAway": "Take-away Pack (1,000ml with Lid)",
+      "drink1": "Eva water 50cl PET",
+      "drink1Price": "N1200",
+      "drink2": "Fanta Orange 35cl PET",
+      "drink2Price": "N1300",
+      "category": "goat-meat"
+    }
+  },
+  {
+    "name": "Bukka Hut",
+    "state": "lagos",
+    "location": "Ikorodu",
+    "delivery": "Free delivery",
+    "logo": "../media/resturant-item.png",
+    "rate": "5.0",
+    "id": "8",
+    "details": {
+      "price": "N1500",
+      "meal": "Jollof Rice and Curry Chicken - Belleful Meal",
+      "image": "../../assets/media/resturant-item.png",
+      "userLike": "",
+      "desc": "Two mouth watering pieces of soulfully spiced Jollof rice + a refreshing PET drink.",
+      "takeAway": "Take-away Pack (1,000ml with Lid)",
+      "drink1": "Eva water 50cl PET",
+      "drink1Price": "N1200",
+      "drink2": "Fanta Orange 35cl PET",
+      "drink2Price": "N1300",
+      "category": "bbq"
+    }
+  },
+  {
+    "name": "So Fresh",
+    "state": "lagos",
+    "location": "Ikorodu",
+    "delivery": "Free delivery",
+    "logo": "../media/resturant-item.png",
+    "rate": "5.0",
+    "id": "9",
+    "details": {
+      "price": "N1500",
+      "meal": "Jollof Rice and Curry Chicken - Belleful Meal",
+      "image": "../../assets/media/resturant-item.png",
+      "userLike": "",
+      "desc": "Two mouth watering pieces of soulfully spiced Jollof rice + a refreshing PET drink.",
+      "takeAway": "Take-away Pack (1,000ml with Lid)",
+      "drink1": "Eva water 50cl PET",
+      "drink1Price": "N1200",
+      "drink2": "Fanta Orange 35cl PET",
+      "drink2Price": "N1300",
+      "category": "promotions"
+    }
+  },
+  {
+    "name": "Chicken Republic",
+    "state": "lagos",
+    "location": "Ikorodu",
+    "delivery": "Free delivery",
+    "logo": "../media/resturant-item.png",
+    "rate": "5.0",
+    "id": "10",
+    "details": {
+      "price": "N1500",
+      "meal": "Jollof Rice and Curry Chicken - Belleful Meal",
+      "image": "../../assets/media/resturant-item.png",
+      "userLike": "",
+      "desc": "Two mouth watering pieces of soulfully spiced Jollof rice + a refreshing PET drink.",
+      "takeAway": "Take-away Pack (1,000ml with Lid)",
+      "drink1": "Eva water 50cl PET",
+      "drink1Price": "N1200",
+      "drink2": "Fanta Orange 35cl PET",
+      "drink2Price": "N1300",
+      "category": "promotions"
+    }
+  }
+]

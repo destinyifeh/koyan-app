@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import {
   Dimensions,
   Image,
+  Platform,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -25,9 +27,11 @@ export default function CheckoutPickupProceedScreen(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor('transparent');
-      StatusBar.setTranslucent(true);
       StatusBar.setBarStyle('dark-content');
+      if (Platform.OS === 'android') {
+        StatusBar.setBackgroundColor('transparent');
+        StatusBar.setTranslucent(true);
+      }
     }, []),
   );
 
@@ -46,40 +50,42 @@ export default function CheckoutPickupProceedScreen(props) {
   };
   return (
     <View style={styles.mainContainer}>
-      <ScrollView
-        style={styles.contentContainer}
-        contentContainerStyle={{
-          paddingBottom: 50,
-        }}>
-        <View style={styles.headerContainer}>
-          <TouchableOpacity
-            style={{}}
-            onPress={() => props.navigation.goBack()}>
-            <Feather name="arrow-left" size={20} color="#000000" />
-          </TouchableOpacity>
-          <Text style={styles.titleText}>Checkout</Text>
-        </View>
-        <View style={{marginVertical: 30}}>
-          <CheckoutProgressTwo />
-        </View>
-        <View style={{marginTop: 5}}>
-          <Text style={styles.orderText}>Pickup Address</Text>
-          <View style={styles.descContainer}>
-            <View style={styles.infoContainer}>
-              <Image source={pickupLogo} />
-
-              <View>
-                <Text style={styles.descText}>The Place Restaurant</Text>
-                <Text style={styles.placeText}>Palm Avenue, Ilupeju</Text>
-                <Text style={[styles.placeText, {fontSize: 12}]}>
-                  4mins Away
-                </Text>
-              </View>
-            </View>
-            <Image source={pickupAddress} />
+      <SafeAreaView style={styles.contentContainer}>
+        <ScrollView
+          style={{flex: 1}}
+          contentContainerStyle={{
+            paddingBottom: 50,
+          }}>
+          <View style={styles.headerContainer}>
+            <TouchableOpacity
+              style={{}}
+              onPress={() => props.navigation.goBack()}>
+              <Feather name="arrow-left" size={20} color="#000000" />
+            </TouchableOpacity>
+            <Text style={styles.titleText}>Checkout</Text>
           </View>
-        </View>
-      </ScrollView>
+          <View style={{marginVertical: 30}}>
+            <CheckoutProgressTwo />
+          </View>
+          <View style={{marginTop: 5}}>
+            <Text style={styles.orderText}>Pickup Address</Text>
+            <View style={styles.descContainer}>
+              <View style={styles.infoContainer}>
+                <Image source={pickupLogo} />
+
+                <View>
+                  <Text style={styles.descText}>The Place Restaurant</Text>
+                  <Text style={styles.placeText}>Palm Avenue, Ilupeju</Text>
+                  <Text style={[styles.placeText, {fontSize: 12}]}>
+                    4mins Away
+                  </Text>
+                </View>
+              </View>
+              <Image source={pickupAddress} />
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
       <View style={styles.buttonContainer}>
         <ActionButton
           title="Proceed"

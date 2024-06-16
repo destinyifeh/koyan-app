@@ -40,7 +40,7 @@ export const OpenEateriesItems = () => {
             <EvilIcons name="heart" size={25} color="#8896AB" />
           </TouchableOpacity>
           <TouchableOpacity
-            style={{top: 2.5}}
+            style={{top: 0}}
             onPress={() => navigation.navigate('OrderDescriptionScreen')}>
             <Image source={plusCart} style={{width: 17, height: 17}} />
           </TouchableOpacity>

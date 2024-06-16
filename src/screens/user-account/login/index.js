@@ -1,31 +1,23 @@
-import React, {useState, useEffect} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import React, {useState} from 'react';
 import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
   Dimensions,
-  StatusBar,
-  TouchableOpacity,
-  Image,
   ImageBackground,
+  Platform,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import {Input} from '../../../components/Input';
+import loginHeaderBackground from '../../../assets/media/loginUpperBackgroun.png';
 import {
-  COLOUR_GHOST_WHITE,
-  COLOUR_LIGHT_BLUE,
   COLOUR_WHITE,
   FONT_FAMILY_BODY,
-  FONT_FAMILY_BODY_BOLD,
   FONT_FAMILY_BODY_SEMIBOLD,
   MAX_ALLOWED_WIDTH,
 } from '../../../constants/Styles';
-import {useFocusEffect} from '@react-navigation/native';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import loginHeaderBackground from '../../../assets/media/loginUpperBackgroun.png';
-import flag from '../../../assets/media/nigeriaColor.png';
-import {ActionButton} from '../../../components/ActionButton';
 
 import LoginForm from './components/loginForm';
 const deviceWidth = Dimensions.get('window').width;
@@ -34,9 +26,12 @@ export default function LoginScreen(props) {
   const [form, setForm] = useState('');
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor('transparent');
+      if (Platform.OS === 'android') {
+        StatusBar.setBackgroundColor('transparent');
+        StatusBar.setBarStyle('light-content');
+        StatusBar.setTranslucent(true);
+      }
       StatusBar.setBarStyle('light-content');
-      StatusBar.setTranslucent(true);
     }, []),
   );
 

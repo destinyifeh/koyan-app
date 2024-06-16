@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Dimensions,
   Image,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -21,7 +22,8 @@ const deviceWidth = Dimensions.get('window').width;
 export default function AccountScreen(props) {
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_LIGHT_BLUE);
+      Platform.OS === 'android' &&
+        StatusBar.setBackgroundColor(COLOUR_LIGHT_BLUE);
 
       StatusBar.setBarStyle('light-content');
     }, []),
@@ -63,7 +65,7 @@ export default function AccountScreen(props) {
               <Image source={changePassIcon} resizeMode="contain" />
               <TouchableOpacity
                 onPress={() => props.navigation.navigate('ChangePassword')}>
-                <Text style={styles.navigatorItemsText}>Chnage Password</Text>
+                <Text style={styles.navigatorItemsText}>Change Password</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.navigatorItems}>

@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import {
   Dimensions,
   Image,
+  Platform,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -58,9 +60,11 @@ export default function PaymentScreen(props) {
   const eateries = useSelector(state => state.eateries);
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor('transparent');
-      StatusBar.setTranslucent(true);
       StatusBar.setBarStyle('dark-content');
+      if (Platform.OS === 'android') {
+        StatusBar.setBackgroundColor('transparent');
+        StatusBar.setTranslucent(true);
+      }
     }, []),
   );
 
@@ -172,155 +176,159 @@ export default function PaymentScreen(props) {
 
   return (
     <View style={styles.mainContainer}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={styles.contentContainer}
-        contentContainerStyle={{
-          paddingBottom: 50,
-        }}>
-        <View style={styles.headerContainer}>
-          <TouchableOpacity
-            style={{}}
-            onPress={() => props.navigation.goBack()}>
-            <Feather name="arrow-left" size={20} color="#000000" />
-          </TouchableOpacity>
-          <Text style={styles.titleText}>Checkout</Text>
-        </View>
-        <View style={{marginVertical: 30}}>
-          <CheckoutProgressThree />
-        </View>
-        <View style={{marginTop: 5}}>
-          <Text style={styles.mainPaymentText}>Payment Method</Text>
-          <View
-            style={
-              isPaymentError
-                ? styles.isErrorView
-                : styles.selectPaymentMethodView
-            }>
-            <Text style={styles.mainPaymentText}>Select Payment Method</Text>
-            <View>
-              <View style={styles.paymentMethodContainer}>
-                <View style={styles.paymentMethodContainerInner}>
-                  <Image source={bankIcon} />
-                  <Text style={styles.paymentMethodText}>Bank Transfer</Text>
-                </View>
-                <TouchableOpacity
-                  onPress={() => handleSelectPaymentMethod('transfer')}>
-                  {selectPaymentType.transfer ? (
-                    <CheckBoxActive />
-                  ) : (
-                    <Image source={checkBoxIcon} />
-                  )}
-                </TouchableOpacity>
-              </View>
-              <View style={styles.paymentMethodContainer}>
-                <View style={styles.paymentMethodContainerInner}>
-                  <Image source={cashIcon} />
-                  <Text style={styles.paymentMethodText}>Pay with Cash</Text>
-                </View>
-                <TouchableOpacity
-                  onPress={() => handleSelectPaymentMethod('cash')}>
-                  {selectPaymentType.cash ? (
-                    <CheckBoxActive />
-                  ) : (
-                    <Image source={checkBoxIcon} />
-                  )}
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.paymentMethodContainer}>
-                <View style={styles.paymentMethodContainerInner}>
-                  <Image source={cardIcon} />
-                  <Text style={styles.paymentMethodText}>Pay with Card</Text>
-                </View>
-                <TouchableOpacity
-                  onPress={() => handleSelectPaymentMethod('card')}>
-                  {selectPaymentType.card ? (
-                    <CheckBoxActive />
-                  ) : (
-                    <Image source={checkBoxIcon} />
-                  )}
-                </TouchableOpacity>
-              </View>
-            </View>
+      <SafeAreaView style={styles.contentContainer}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{flex: 1}}
+          contentContainerStyle={{
+            paddingBottom: 50,
+          }}>
+          <View style={styles.headerContainer}>
+            <TouchableOpacity
+              style={{}}
+              onPress={() => props.navigation.goBack()}>
+              <Feather name="arrow-left" size={20} color="#000000" />
+            </TouchableOpacity>
+            <Text style={styles.titleText}>Checkout</Text>
           </View>
-          {isPaymentError && (
-            <View style={{marginTop: 15}}>
-              <Text style={styles.errorText}>
-                Oops! You’ve not selected your payment Method
-              </Text>
-            </View>
-          )}
-          <View style={styles.promoContainer}>
-            <View style={styles.paymentMethodContainer}>
-              <View style={styles.paymentMethodContainerInner}>
-                <Image source={promoIcon} />
-                <Text style={styles.promoText}>Do you have a promo Code?</Text>
+          <View style={{marginVertical: 30}}>
+            <CheckoutProgressThree />
+          </View>
+          <View style={{marginTop: 5}}>
+            <Text style={styles.mainPaymentText}>Payment Method</Text>
+            <View
+              style={
+                isPaymentError
+                  ? styles.isErrorView
+                  : styles.selectPaymentMethodView
+              }>
+              <Text style={styles.mainPaymentText}>Select Payment Method</Text>
+              <View>
+                <View style={styles.paymentMethodContainer}>
+                  <View style={styles.paymentMethodContainerInner}>
+                    <Image source={bankIcon} />
+                    <Text style={styles.paymentMethodText}>Bank Transfer</Text>
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => handleSelectPaymentMethod('transfer')}>
+                    {selectPaymentType.transfer ? (
+                      <CheckBoxActive />
+                    ) : (
+                      <Image source={checkBoxIcon} />
+                    )}
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.paymentMethodContainer}>
+                  <View style={styles.paymentMethodContainerInner}>
+                    <Image source={cashIcon} />
+                    <Text style={styles.paymentMethodText}>Pay with Cash</Text>
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => handleSelectPaymentMethod('cash')}>
+                    {selectPaymentType.cash ? (
+                      <CheckBoxActive />
+                    ) : (
+                      <Image source={checkBoxIcon} />
+                    )}
+                  </TouchableOpacity>
+                </View>
+
+                <View style={styles.paymentMethodContainer}>
+                  <View style={styles.paymentMethodContainerInner}>
+                    <Image source={cardIcon} />
+                    <Text style={styles.paymentMethodText}>Pay with Card</Text>
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => handleSelectPaymentMethod('card')}>
+                    {selectPaymentType.card ? (
+                      <CheckBoxActive />
+                    ) : (
+                      <Image source={checkBoxIcon} />
+                    )}
+                  </TouchableOpacity>
+                </View>
               </View>
-              <TouchableOpacity onPress={handleShowPromoCode}>
-                <Ionicons
-                  name="chevron-forward-outline"
-                  color="#000000"
-                  size={16}
-                />
-              </TouchableOpacity>
             </View>
-            {showPromoCode && (
-              <Animatable.View
-                style={{marginBottom: 20}}
-                animation="slideInLeft">
-                <Input
-                  title="Promo Code"
-                  placeholder="Promo Code"
-                  onChangeText={promoCode => {
-                    updateFormField({promoCode});
-                  }}
-                  value={form?.promoCode}
-                  mainContainerStyle={{marginTop: 10}}
-                />
-              </Animatable.View>
+            {isPaymentError && (
+              <View style={{marginTop: 15}}>
+                <Text style={styles.errorText}>
+                  Oops! You’ve not selected your payment Method
+                </Text>
+              </View>
             )}
+            <View style={styles.promoContainer}>
+              <View style={styles.paymentMethodContainer}>
+                <View style={styles.paymentMethodContainerInner}>
+                  <Image source={promoIcon} />
+                  <Text style={styles.promoText}>
+                    Do you have a promo Code?
+                  </Text>
+                </View>
+                <TouchableOpacity onPress={handleShowPromoCode}>
+                  <Ionicons
+                    name="chevron-forward-outline"
+                    color="#000000"
+                    size={16}
+                  />
+                </TouchableOpacity>
+              </View>
+              {showPromoCode && (
+                <Animatable.View
+                  style={{marginBottom: 20}}
+                  animation="slideInLeft">
+                  <Input
+                    title="Promo Code"
+                    placeholder="Promo Code"
+                    onChangeText={promoCode => {
+                      updateFormField({promoCode});
+                    }}
+                    value={form?.promoCode}
+                    mainContainerStyle={{marginTop: 10}}
+                  />
+                </Animatable.View>
+              )}
+            </View>
+
+            <View style={styles.orderSummaryContainer}>
+              <Text style={styles.summaryText}>Order Summary</Text>
+              <View style={styles.orderSummaryInnerContainer}>
+                <Text style={styles.summaryChildrenText}>Order</Text>
+                <Text style={styles.summaryChildrenText}>N5000.00</Text>
+              </View>
+              <View style={styles.orderSummaryInnerContainer}>
+                <Text style={styles.summaryChildrenText}>Delivery</Text>
+                <Text style={styles.summaryChildrenText}>FREE</Text>
+              </View>
+
+              <View style={styles.orderSummaryInnerContainer}>
+                <Text style={styles.summaryChildrenText}>Services</Text>
+                <Text style={styles.summaryChildrenText}>N100.00</Text>
+              </View>
+
+              <View style={styles.orderSummaryInnerContainer}>
+                <Text style={styles.totalPaymentText}>Total</Text>
+                <Text style={styles.totalPaymentText}>N5100.00</Text>
+              </View>
+            </View>
           </View>
 
-          <View style={styles.orderSummaryContainer}>
-            <Text style={styles.summaryText}>Order Summary</Text>
-            <View style={styles.orderSummaryInnerContainer}>
-              <Text style={styles.summaryChildrenText}>Order</Text>
-              <Text style={styles.summaryChildrenText}>N5000.00</Text>
-            </View>
-            <View style={styles.orderSummaryInnerContainer}>
-              <Text style={styles.summaryChildrenText}>Delivery</Text>
-              <Text style={styles.summaryChildrenText}>FREE</Text>
-            </View>
-
-            <View style={styles.orderSummaryInnerContainer}>
-              <Text style={styles.summaryChildrenText}>Services</Text>
-              <Text style={styles.summaryChildrenText}>N100.00</Text>
-            </View>
-
-            <View style={styles.orderSummaryInnerContainer}>
-              <Text style={styles.totalPaymentText}>Total</Text>
-              <Text style={styles.totalPaymentText}>N5100.00</Text>
-            </View>
-          </View>
-        </View>
-
-        <BankTransferSheet
-          transferSheet={transferSheet}
-          onCloseTransferSheet={onCloseTransferSheet}
-          onPaymentCompleted={onBankTransferPaymentCompleted}
-        />
-        <PaymentProcessingSheet
-          paymentProcessingSheetRef={paymentProcessingSheetRef}
-        />
-        <CardPaymentSheet
-          cardPaymentSheet={cardPaymentSheetRef}
-          cardPaymentForm={cardPaymentForm}
-          onPaymentCompleted={onProcessCardPayment}
-          onCloseCardPaymentSheet={onCloseCardPaymentSheet}
-          updateCardPaymentFormField={updateCardPaymentFormField}
-        />
-      </ScrollView>
+          <BankTransferSheet
+            transferSheet={transferSheet}
+            onCloseTransferSheet={onCloseTransferSheet}
+            onPaymentCompleted={onBankTransferPaymentCompleted}
+          />
+          <PaymentProcessingSheet
+            paymentProcessingSheetRef={paymentProcessingSheetRef}
+          />
+          <CardPaymentSheet
+            cardPaymentSheet={cardPaymentSheetRef}
+            cardPaymentForm={cardPaymentForm}
+            onPaymentCompleted={onProcessCardPayment}
+            onCloseCardPaymentSheet={onCloseCardPaymentSheet}
+            updateCardPaymentFormField={updateCardPaymentFormField}
+          />
+        </ScrollView>
+      </SafeAreaView>
 
       <View style={styles.buttonContainer}>
         <ActionButton title="Complete Order" onPress={onCompleteOrder} />

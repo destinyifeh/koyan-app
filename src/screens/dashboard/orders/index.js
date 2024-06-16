@@ -2,6 +2,8 @@ import {useFocusEffect} from '@react-navigation/native';
 import React from 'react';
 import {
   Dimensions,
+  Platform,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
@@ -24,7 +26,7 @@ export default function OrdersScreen() {
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_WHITE);
+      Platform.OS === 'android' && StatusBar.setBackgroundColor(COLOUR_WHITE);
       StatusBar.setBarStyle('dark-content');
       setActiveNav('cart');
     }, []),
@@ -38,7 +40,7 @@ export default function OrdersScreen() {
   };
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.contentContainer}>
+      <SafeAreaView style={styles.contentContainer}>
         <View style={styles.headerContainer}>
           <Text style={styles.titleText}>My Orders</Text>
           {activeNav === 'cart' && (
@@ -93,7 +95,7 @@ export default function OrdersScreen() {
           {activeNav === 'ongoing' && (
             <>
               <OngoingItems orderType={'delivery'} />
-              <OngoingItems orderType={'pickup'} />
+              <OngoingItems orderType={'eatin'} />
             </>
           )}
 
@@ -101,7 +103,7 @@ export default function OrdersScreen() {
             <Text style={{textAlign: 'center'}}>No completed order yet!</Text>
           )}
         </View>
-      </View>
+      </SafeAreaView>
     </View>
   );
 }

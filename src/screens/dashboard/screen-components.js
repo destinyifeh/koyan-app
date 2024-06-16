@@ -5,7 +5,7 @@ import {DashboardTabs} from './navigator';
 import OrderMapViewScreen from './orders/orders-screens/map-view';
 import OngoingDeliveryScreen from './orders/orders-screens/ongoing-delivery';
 import OngoingEatinScreen from './orders/orders-screens/ongoing-eatIn';
-import OngoingPickupScreen from './orders/orders-screens/ongoing-pickup';
+import OngoingPickupScreen from './orders/orders-screens/ongoing-pickup.js';
 
 export const dashboardScreenComponents = [
   {name: 'UpdateProfile', component: UpdateAccountScreen},

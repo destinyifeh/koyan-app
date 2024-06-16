@@ -2,6 +2,8 @@ import React from 'react';
 import {
   Dimensions,
   Image,
+  Platform,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -33,7 +35,7 @@ export default function OrderDescriptionScreen(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_WHITE);
+      Platform.OS === 'android' && StatusBar.setBackgroundColor(COLOUR_WHITE);
       StatusBar.setBarStyle('dark-content');
     }, []),
   );
@@ -108,47 +110,49 @@ export default function OrderDescriptionScreen(props) {
   };
   return (
     <View style={styles.mainContainer}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={styles.contentContainer}
-        contentContainerStyle={{
-          paddingBottom: 100,
-        }}>
-        <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Feather name="arrow-left" size={18} color="#000000" />
-          </TouchableOpacity>
-          <Text style={styles.backText}>Back</Text>
-        </View>
+      <SafeAreaView style={styles.contentContainer}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingBottom: 100,
+          }}>
+          <View style={styles.headerContainer}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Feather name="arrow-left" size={18} color="#000000" />
+            </TouchableOpacity>
+            <Text style={styles.backText}>Back</Text>
+          </View>
 
-        <View style={{marginTop: 20}}>
-          <Text style={styles.titleText}>Jollof Rice and Curry Chicken</Text>
-          <Text style={styles.mainPriceText}>N1400</Text>
-        </View>
+          <View style={{marginTop: 20}}>
+            <Text style={styles.titleText}>Jollof Rice and Curry Chicken</Text>
+            <Text style={styles.mainPriceText}>N1400</Text>
+          </View>
 
-        <View style={{marginTop: 13}}>
-          <Image
-            source={restaurantitem}
-            style={{width: '100%', height: 186, borderRadius: 10}}
-          />
-        </View>
+          <View style={{marginTop: 13}}>
+            <Image
+              source={restaurantitem}
+              style={{width: '100%', height: 186, borderRadius: 10}}
+            />
+          </View>
 
-        <View style={{marginTop: 10}}>
-          <Text style={styles.mainDescText}>
-            Two mouth watering pieces of soulfully spiced Jollof rice + a
-            refreshing PET drink.
-          </Text>
-        </View>
-        <View style={styles.AdditionalContentsContainer}>
-          <AdditionalContents />
-        </View>
-      </ScrollView>
+          <View style={{marginTop: 10}}>
+            <Text style={styles.mainDescText}>
+              Two mouth watering pieces of soulfully spiced Jollof rice + a
+              refreshing PET drink.
+            </Text>
+          </View>
+          <View style={styles.AdditionalContentsContainer}>
+            <AdditionalContents />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
       <View style={styles.buttonContainer}>
         <ActionButton
           title="Add to Cart"
           onPress={() => sheetRef.current?.open()}
         />
       </View>
+
       <SuccessShoppingOrderSheet
         handleCloseSheet={handleCloseSheet}
         sheetRef={sheetRef}
@@ -234,6 +238,12 @@ const styles = StyleSheet.create({
     width:
       deviceWidth > MAX_ALLOWED_WIDTH ? MAX_ALLOWED_WIDTH : deviceWidth * 0.9,
     alignSelf: 'center',
+    ...Platform.select({
+      ios: {
+        bottom: 30,
+        zIndex: 1,
+      },
+    }),
   },
   backText: {
     fontFamily: FONT_FAMILY_BODY,

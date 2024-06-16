@@ -1,7 +1,10 @@
 import React, {useCallback} from 'react';
 import {
   Dimensions,
+  FlatList,
   Image,
+  Platform,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -42,7 +45,7 @@ export default function OpenEateriesScreen(props) {
   console.log(eateries.orderType, 'seatt');
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_WHITE);
+      Platform.OS === 'android' && StatusBar.setBackgroundColor(COLOUR_WHITE);
       StatusBar.setBarStyle('dark-content');
     }, []),
   );
@@ -100,9 +103,20 @@ export default function OpenEateriesScreen(props) {
     console.log(orderType, 'choicer');
     props.navigation.navigate(orderType.route);
   };
+
+  const DATA = [1, 2, 3, 4];
+
+  const renderItem = ({item}) => (
+    <View style={styles.items}>
+      <OpenEateriesItems />
+      <OpenEateriesItems />
+    </View>
+  );
+
+  const keyExtractor = (item, index) => index.toString();
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.contentContainer}>
+      <SafeAreaView style={styles.contentContainer}>
         <View style={styles.headerContainer}>
           <View style={styles.headerInnerContainer}>
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
@@ -247,13 +261,14 @@ export default function OpenEateriesScreen(props) {
           </ScrollView>
         </View>
 
-        <View style={styles.items}>
-          <OpenEateriesItems />
-          <OpenEateriesItems />
-          <OpenEateriesItems />
-          <OpenEateriesItems />
-        </View>
-      </View>
+        <FlatList
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          contentContainerStyle={{paddingBottom: 280}}
+          showsVerticalScrollIndicator={false}
+        />
+      </SafeAreaView>
       {!checkCart ? (
         <View style={styles.btContainer}>
           <ActionButton
@@ -292,7 +307,6 @@ const styles = StyleSheet.create({
     width:
       deviceWidth > MAX_ALLOWED_WIDTH ? MAX_ALLOWED_WIDTH : deviceWidth * 0.9,
     alignSelf: 'center',
-    flex: 1,
     paddingBottom: 60,
     paddingTop: 50,
   },
@@ -372,6 +386,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 20,
     marginVertical: 20,
+    alignSelf: 'center',
   },
 
   theEateryContainer: {
@@ -430,10 +445,11 @@ const styles = StyleSheet.create({
     right: 10,
     position: 'absolute',
     alignSelf: 'flex-end',
+    zIndex: 1,
   },
   btContainer: {
-    bottom: 10,
-
+    bottom: 25,
+    zIndex: 1,
     position: 'absolute',
     width: '90%',
     alignSelf: 'center',

@@ -3,6 +3,8 @@ import React from 'react';
 import {
   Dimensions,
   Image,
+  Platform,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
@@ -30,9 +32,11 @@ export default function CheckoutEatInConfirmOrderScreen(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor('transparent');
-      StatusBar.setTranslucent(true);
       StatusBar.setBarStyle('dark-content');
+      if (Platform.OS === 'android') {
+        StatusBar.setBackgroundColor('transparent');
+        StatusBar.setTranslucent(true);
+      }
     }, []),
   );
 
@@ -98,7 +102,7 @@ export default function CheckoutEatInConfirmOrderScreen(props) {
   };
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.contentContainer}>
+      <SafeAreaView style={styles.contentContainer}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             style={{}}
@@ -143,7 +147,7 @@ export default function CheckoutEatInConfirmOrderScreen(props) {
             }
           />
         </View>
-      </View>
+      </SafeAreaView>
     </View>
   );
 }

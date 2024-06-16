@@ -2,6 +2,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import React from 'react';
 import {
   Dimensions,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -9,11 +10,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {ActionButton} from '../../../components/ActionButton';
 import {KoyanBottomDrawer} from '../../../components/KoyanBottomDrawer';
 import {
+  COLOUR_LIGHT_BLUE,
   COLOUR_WHITE,
   FONT_FAMILY_BODY,
   FONT_FAMILY_BODY_SEMIBOLD,
@@ -28,7 +31,14 @@ export const BankTransferSheet = ({
 }) => {
   const copyToClipboard = text => {
     Clipboard.setString(text);
-    ToastAndroid.show('copied', ToastAndroid.LONG);
+    if (Platform.OS === 'android') {
+      ToastAndroid.show('copied', ToastAndroid.LONG);
+    } else {
+      Toast.show('Copied', Toast.LONG, {
+        backgroundColor: 'white',
+        textColor: COLOUR_LIGHT_BLUE,
+      });
+    }
   };
 
   return (

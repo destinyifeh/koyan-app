@@ -3,6 +3,8 @@ import React from 'react';
 import {
   Dimensions,
   Image,
+  Platform,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -28,69 +30,74 @@ const deviceHeight = Dimensions.get('window').height;
 export default function HomeScreen(props) {
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor(COLOUR_WHITE);
+      Platform.OS === 'android' && StatusBar.setBackgroundColor(COLOUR_WHITE);
       StatusBar.setBarStyle('dark-content');
     }, []),
   );
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      style={styles.mainContainer}>
-      <View style={styles.contentContainer}>
-        <HomeSearchBar />
+    <View style={styles.mainContainer}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingBottom: Platform.OS === 'android' ? 20 : 30,
+        }}
+        style={styles.mainContainer}>
+        <SafeAreaView style={styles.contentContainer}>
+          <HomeSearchBar />
 
-        <View style={{flex: 1, marginTop: 19}}>
-          <Text style={styles.aroundYouText}>Around You</Text>
-          <ScrollView
-            horizontal
-            style={{marginTop: 8, flex: 1}}
-            contentContainerStyle={styles.scrollableItems}
-            showsHorizontalScrollIndicator={false}>
-            <AroundYouItems />
-            <AroundYouItems />
-            <AroundYouItems />
-          </ScrollView>
-        </View>
-
-        <View style={styles.categoriesContainer}>
-          <Text style={styles.aroundYouText}>Categories</Text>
-
-          <View style={styles.categoriesInnerContainer}>
-            <TouchableOpacity>
-              <Image source={martHome} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('Eateries')}>
-              <Image source={eateriesHome} />
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-              <Image source={hotelsHome} />
-            </TouchableOpacity>
+          <View style={{flex: 1, marginTop: 19}}>
+            <Text style={styles.aroundYouText}>Around You</Text>
+            <ScrollView
+              horizontal
+              style={{marginTop: 8, flex: 1}}
+              contentContainerStyle={styles.scrollableItems}
+              showsHorizontalScrollIndicator={false}>
+              <AroundYouItems />
+              <AroundYouItems />
+              <AroundYouItems />
+            </ScrollView>
           </View>
-        </View>
 
-        <View style={styles.categoriesContainer}>
-          <Text style={styles.aroundYouText}>Promotions</Text>
+          <View style={styles.categoriesContainer}>
+            <Text style={styles.aroundYouText}>Categories</Text>
 
-          <View style={{marginTop: 8}}>
-            <PromotionItems />
+            <View style={styles.categoriesInnerContainer}>
+              <TouchableOpacity>
+                <Image source={martHome} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('Eateries')}>
+                <Image source={eateriesHome} />
+              </TouchableOpacity>
+
+              <TouchableOpacity>
+                <Image source={hotelsHome} />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        <View style={{flex: 1, marginTop: 19}}>
-          <Text style={styles.aroundYouText}>For You</Text>
-          <ScrollView
-            horizontal
-            style={{marginTop: 8, flex: 1}}
-            contentContainerStyle={styles.scrollableItems}
-            showsHorizontalScrollIndicator={false}>
-            <ForYouItems />
-            <ForYouItems />
-            <ForYouItems />
-          </ScrollView>
-        </View>
-      </View>
-    </ScrollView>
+
+          <View style={styles.categoriesContainer}>
+            <Text style={styles.aroundYouText}>Promotions</Text>
+
+            <View style={{marginTop: 8}}>
+              <PromotionItems />
+            </View>
+          </View>
+          <View style={{flex: 1, marginTop: 19}}>
+            <Text style={styles.aroundYouText}>For You</Text>
+            <ScrollView
+              horizontal
+              style={{marginTop: 8, flex: 1}}
+              contentContainerStyle={styles.scrollableItems}
+              showsHorizontalScrollIndicator={false}>
+              <ForYouItems />
+              <ForYouItems />
+              <ForYouItems />
+            </ScrollView>
+          </View>
+        </SafeAreaView>
+      </ScrollView>
+    </View>
   );
 }
 
