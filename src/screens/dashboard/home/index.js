@@ -1,6 +1,7 @@
 import {useFocusEffect} from '@react-navigation/native';
 import React from 'react';
 import {
+  Alert,
   Dimensions,
   Image,
   Platform,
@@ -62,7 +63,10 @@ export default function HomeScreen(props) {
             <Text style={styles.aroundYouText}>Categories</Text>
 
             <View style={styles.categoriesInnerContainer}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  Alert.alert(null, 'This feature is not yet active.')
+                }>
                 <Image source={martHome} />
               </TouchableOpacity>
               <TouchableOpacity
@@ -70,7 +74,10 @@ export default function HomeScreen(props) {
                 <Image source={eateriesHome} />
               </TouchableOpacity>
 
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  Alert.alert(null, 'This feature is not yet active.')
+                }>
                 <Image source={hotelsHome} />
               </TouchableOpacity>
             </View>
