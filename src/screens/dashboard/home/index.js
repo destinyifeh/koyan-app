@@ -35,6 +35,10 @@ export default function HomeScreen(props) {
       StatusBar.setBarStyle('dark-content');
     }, []),
   );
+
+  React.useEffect(() => {
+    // requestLocationPermission();
+  }, []);
   return (
     <View style={styles.mainContainer}>
       <ScrollView

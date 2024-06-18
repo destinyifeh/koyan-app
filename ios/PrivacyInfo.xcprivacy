@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryLocation</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>Location is used for providing map services</string>
+			</array>
+		</dict>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryCamera</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+			<string>Camera access is required to upload photos and scan QR codes.</string>
+			</array>
+		</dict>
+	</array>
+	<key>NSPrivacyCollectedDataTypes</key>
+   <array>
+    <dict>
+        <key>DataType</key>
+        <string>User Information</string>
+        <key>Purpose</key>
+        <string>To create and manage user accounts</string>
+    </dict>
+  </array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We use location to show nearby services you might need</string>
+	<key>NSPrivacyTracking</key>
+	<false/>
+</dict>
+</plist>
