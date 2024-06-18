@@ -1,0 +1,1 @@
+export const LAST_ACTIVE_SCREEN = 'LAST_ACTIVE_SCREEN';

@@ -158,7 +158,10 @@ export default function PaymentScreen(props) {
 
   const onProcessCardPayment = React.useCallback(() => {
     cardPaymentSheetRef.current?.close();
-    paymentProcessingSheetRef.current?.open();
+    setTimeout(() => {
+      paymentProcessingSheetRef.current?.open();
+    }, 1000);
+
     setTimeout(() => {
       paymentProcessingSheetRef.current?.close();
       props.navigation.navigate('PaymentSuccessScreen');
@@ -167,12 +170,15 @@ export default function PaymentScreen(props) {
 
   const onBankTransferPaymentCompleted = React.useCallback(() => {
     transferSheet.current?.close();
-    paymentProcessingSheetRef.current?.open();
+    setTimeout(() => {
+      paymentProcessingSheetRef.current?.open();
+    }, 1000);
+
     setTimeout(() => {
       paymentProcessingSheetRef.current?.close();
       props.navigation.navigate('PaymentSuccessScreen');
     }, 7000);
-  }, []);
+  }, [props.navigation]);
 
   return (
     <View style={styles.mainContainer}>
