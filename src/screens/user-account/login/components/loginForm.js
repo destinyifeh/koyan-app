@@ -1,30 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-  StatusBar,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import {Input} from '../../../../components/Input';
-import {
-  COLOUR_GHOST_WHITE,
-  COLOUR_LIGHT_BLUE,
-  COLOUR_WHITE,
-  FONT_FAMILY_BODY,
-  FONT_FAMILY_BODY_BOLD,
-  FONT_FAMILY_BODY_SEMIBOLD,
-  MAX_ALLOWED_WIDTH,
-} from '../../../../constants/Styles';
-import {useFocusEffect} from '@react-navigation/native';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useNavigation} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import flag from '../../../../assets/media/nigeriaColor.png';
 import {ActionButton} from '../../../../components/ActionButton';
+import {Input} from '../../../../components/Input';
+import {FONT_FAMILY_BODY} from '../../../../constants/Styles';
 
 export default function LoginForm({updateFormField}) {
   const [visiblePassword, setVisiblePassword] = useState(false);
@@ -67,7 +48,8 @@ export default function LoginForm({updateFormField}) {
           title="Login"
           disabled={false}
         />
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('DashboardScreen')}>
           <Text style={styles.guestText}>Continue as Guest</Text>
         </TouchableOpacity>
       </View>
