@@ -6,7 +6,8 @@ import {Input} from '../../../../components/Input';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
-export const HomeSearchBar = () => {
+export const HomeSearchBar = props => {
+  console.log(props.location, 'locatee');
   return (
     <View
       style={{
@@ -32,16 +33,19 @@ export const HomeSearchBar = () => {
           }}
           textContentType="location"
           onChangeText={location => {
-            console.log(location, 'locate');
+            props.setLocation(location);
           }}
           inputContainerStyle={{
             borderColor: '#E8E9E9',
             height: 36,
           }}
+          value={props.location}
         />
       </View>
 
-      <TouchableOpacity style={{marginTop: 44}}>
+      <TouchableOpacity
+        style={{marginTop: 44}}
+        onPress={props.onSearchLocation}>
         <Feather name="search" size={16} />
       </TouchableOpacity>
     </View>

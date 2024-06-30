@@ -4,7 +4,7 @@ const initialState = {
   currentRoute: null,
   previousRoute: null,
   appStatus: null,
-  cusLocationData: null,
+  businessLocationData: null,
   userAddressData: null,
   userLocationData: null,
   remoteConfigs: {
@@ -37,9 +37,9 @@ export const globalSlice = createSlice({
       state.userAddressData = action.payload;
     },
 
-    getCustomerLocationData: (state, action) => {
-      console.log(action.payload, 'merchant location');
-      state.cusLocationData = action.payload;
+    getBusinessLocationData: (state, action) => {
+      console.log(action.payload, 'business location');
+      state.businessLocationData = action.payload;
     },
     getRemoteConfigs: (state, action) => {
       console.log(action.payload, 'remote configs');
@@ -55,7 +55,7 @@ export const {
   getAppState,
   getUserLocationData,
   getUserAddressData,
-  getCustomerLocationData,
+  getBusinessLocationData,
   getRemoteConfigs,
 } = globalSlice.actions;
 export default globalSlice.reducer;

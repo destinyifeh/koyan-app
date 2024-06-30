@@ -4,6 +4,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
+import {FONT_FAMILY_BODY} from '../../constants/Styles';
 import QRScreen from './QR';
 import AccountScreen from './account';
 import HomeScreen from './home';
@@ -22,6 +23,13 @@ export function DashboardTabs() {
         headerShown: false,
         tabBarActiveBackgroundColor: '#E3EEFC',
         tabBarActiveTintColor: '#74AAF0',
+        tabBarLabelStyle: {
+          color: '#757C7D',
+          fontFamily: FONT_FAMILY_BODY,
+          lineHeight: 18,
+          fontWeight: '400',
+          fontSize: 12,
+        },
       }}>
       <Tab.Screen
         name="Home"
@@ -29,7 +37,7 @@ export function DashboardTabs() {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <MaterialCommunityIcons name="home" color={color} size={16} />
           ),
         }}
       />
@@ -40,7 +48,7 @@ export function DashboardTabs() {
         options={{
           tabBarLabel: 'Orders',
           tabBarIcon: ({color, size}) => (
-            <FontAwesome name="shopping-basket" color={color} size={size} />
+            <FontAwesome name="shopping-basket" color={color} size={16} />
           ),
         }}
       />
@@ -51,11 +59,7 @@ export function DashboardTabs() {
         options={{
           tabBarLabel: 'Scan QR',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="line-scan"
-              color={color}
-              size={size}
-            />
+            <MaterialCommunityIcons name="line-scan" color={color} size={16} />
           ),
         }}
       />
@@ -66,7 +70,7 @@ export function DashboardTabs() {
         options={{
           tabBarLabel: 'Support',
           tabBarIcon: ({color, size}) => (
-            <SimpleLineIcons name="earphones-alt" color={color} size={size} />
+            <SimpleLineIcons name="earphones-alt" color={color} size={16} />
           ),
         }}
       />
@@ -77,7 +81,7 @@ export function DashboardTabs() {
         options={{
           tabBarLabel: 'Account',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <MaterialCommunityIcons name="account" color={color} size={16} />
           ),
         }}
       />
