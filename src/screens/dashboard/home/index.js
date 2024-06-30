@@ -85,10 +85,11 @@ export default function HomeScreen(props) {
   };
 
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
+    //setRefreshing(true);
+    setIsSearching(true);
     setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
+      setIsSearching(false);
+    }, 5000);
   }, []);
 
   const onSearchLocation = () => {
@@ -97,18 +98,18 @@ export default function HomeScreen(props) {
     setIsSearching(true);
     setTimeout(() => {
       setIsSearching(false);
-    }, 2000);
+    }, 5000);
   };
   return (
     <View style={styles.mainContainer}>
-      {userAddressData?.isLoading || isLoading ? (
+      {userAddressData === null || userAddressData?.isLoading || isLoading ? (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Loader color={COLOUR_LIGHT_BLUE} />
         </View>
       ) : (
         <ScrollView
           refreshControl={
-            <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+            <RefreshControl onRefresh={onRefresh} refreshing={isLoading} />
           }
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{

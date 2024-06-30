@@ -5,13 +5,14 @@ import Modal from 'react-native-modal';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
-const DialogBox = ({children, isVisible}) => {
+const DialogBox = ({children, isVisible, onBackdropPress}) => {
   return (
     <Modal
       statusBarTranslucent={true}
       isVisible={isVisible}
       deviceWidth={deviceWidth}
-      deviceHeight={deviceHeight}>
+      deviceHeight={deviceHeight}
+      onBackdropPress={onBackdropPress}>
       <View style={{flex: 1}}>{children}</View>
     </Modal>
   );
